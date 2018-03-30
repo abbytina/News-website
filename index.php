@@ -116,7 +116,7 @@
         <div class="entry">
           <div class="head">
             <span class="sort"><?php echo $vals['name']?></span>
-            <a href="javascript:;"><?php echo $vals['title']?></a>
+            <a href="detail.php?id=<?= $vals['id'] ?>"><?php echo $vals['title']?></a>
           </div>
           <div class="main">
             <p class="info">admin 发表于 <?php echo $vals['created']?></p>

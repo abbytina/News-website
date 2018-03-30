@@ -27,8 +27,8 @@
         <?php }?>
       </ul>
       <div class="search">
-        <form>
-          <input type="text" class="keys" placeholder="输入关键字">
+        <form action="/search.php">
+          <input type="text" name="keyword" class="keys" placeholder="输入关键字">
           <input type="submit" class="btn" value="搜索">
         </form>
       </div>

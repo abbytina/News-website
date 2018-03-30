@@ -26,10 +26,10 @@
         <li><a href="javascript:;"><i class="fa fa-gift"></i>美奇迹</a></li>
       </ul>
       <div class="search">
-        <form>
-          <input type="text" class="keys" placeholder="输入关键字">
-          <input type="submit" class="btn" value="搜索">
-        </form>
+          <form action="/search.php">
+              <input type="text" name="keyword" class="keys" placeholder="输入关键字">
+              <input type="submit" class="btn" value="搜索">
+          </form>
       </div>
       <div class="slink">
         <a href="javascript:;">链接01</a> | <a href="javascript:;">链接02</a>
@@ -39,10 +39,10 @@
       <div class="widgets">
         <h4>搜索</h4>
         <div class="body search">
-          <form>
-            <input type="text" class="keys" placeholder="输入关键字">
-            <input type="submit" class="btn" value="搜索">
-          </form>
+            <form action="/search.php">
+                <input type="text" name="keyword" class="keys" placeholder="输入关键字">
+                <input type="submit" class="btn" value="搜索">
+            </form>
         </div>
       </div>
       <div class="widgets">

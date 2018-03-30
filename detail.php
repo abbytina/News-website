@@ -1,12 +1,76 @@
+<?php
+require_once './functions.php';
+/**
+ * 获取文章详情
+ * @param $postId
+ * @return mixed
+ */
+function get_post_detail($postId)
+{
+
+    $sql = <<<SQL
+SELECT
+  p.id,
+  p.title,
+  p.content,
+  p.views,
+  p.category_id,
+  c.name AS c_name,
+  u.nickname AS nickname
+FROM posts AS p
+  LEFT JOIN categories AS c ON p.category_id = c.id
+  LEFT JOIN users AS u ON u.id = p.user_id
+WHERE p.id =  $postId
+SQL;
+    $row = query($sql);
+    if (empty($row)) {
+        exit('文章不存在');
+    }
+    $detail = $row[0];
+
+    $sql = "SELECT count(id) AS num FROM comments WHERE id = {$detail['id']}";
+    $row = query($sql);
+    $detail['comments'] = $row[0]['num'];
+    query("UPDATE posts SET views=views + 1 where id = {$detail['id']}");
+    return $detail;
+}
+
+/**
+ * 获取文章评论
+ * @param $postId
+ * @return array
+ */
+function get_post_comment($postId)
+{
+    $sql = "SELECT * FROM comments WHERE post_id = {$postId} AND `status` ='approved' ORDER BY created DESC";
+    $row = query($sql);
+    return $row;
+}
+
+if (!isset($_GET['id'])) {
+    echo '页面不存在';
+    exit();
+}
+$postDetail = get_post_detail($_GET['id']);
+
+?>
+<?php
+$json = query("SELECT `value` FROM options WHERE `key` = 'nav_menus'");
+// print_r($lists);
+// exit;
+//1. 导航完成
+$lists = json_decode($json[0]['value'],true);
+$sites[2]['value'] = $postDetail['title'];
+?>
 <?php include './inc/head.php'?>
     <div class="aside">
       <div class="widgets">
         <h4>搜索</h4>
         <div class="body search">
-          <form>
-            <input type="text" class="keys" placeholder="输入关键字">
-            <input type="submit" class="btn" value="搜索">
-          </form>
+            <form action="/search.php">
+                <input type="text" name="keyword" class="keys" placeholder="输入关键字">
+                <input type="submit" class="btn" value="搜索">
+            </form>
         </div>
       </div>
       <div class="widgets">
@@ -148,20 +212,30 @@
         <div class="breadcrumb">
           <dl>
             <dt>当前位置：</dt>
-            <dd><a href="javascript:;">奇趣事</a></dd>
-            <dd>变废为宝！将手机旧电池变为充电宝的Better RE移动电源</dd>
+            <dd><a href="javascript:;"><?php echo $postDetail['c_name']?></a></dd>
+            <dd><?php echo $postDetail['title']?></dd>
           </dl>
         </div>
         <h2 class="title">
-          <a href="javascript:;">又现酒窝夹笔盖新技能 城里人是不让人活了！</a>
+          <a href="javascript:;"><?php echo $postDetail['title']?></a>
         </h2>
         <div class="meta">
-          <span>DUX主题小秘 发布于 2015-06-29</span>
-          <span>分类: <a href="javascript:;">奇趣事</a></span>
-          <span>阅读: (2421)</span>
-          <span>评论: (143)</span>
+          <span><?php echo $postDetail['nickname']?>发布于 <?php echo $postDetail['created']?></span>
+          <span>分类: <a href="javascript:;"><?php echo $postDetail['c_name']?></a></span>
+          <span>阅读: (<?php echo $postDetail['views']?>)</span>
+          <span>评论: (<?php echo $postDetail['comments']?>)</span>
         </div>
+          <div>
+              <?php echo $postDetail['content']?>
+          </div>
       </div>
+        <div>
+            <?php
+            foreach (get_post_comment($_GET['id']) as $item) {
+                echo $item['author'], $item['email'], $item['created'], $item['content'], '<br>';
+            }
+            ?>
+        </div>
       <div class="panel hots">
         <h3>热门推荐</h3>
         <ul>
