@@ -120,4 +120,7 @@ function json_encode_no_zh($arr)
     return preg_replace($search, $replace, $str);
 }
 
-?>
+function isPost()
+{
+    return isset($_SERVER['REQUEST_METHOD']) && !strcasecmp($_SERVER['REQUEST_METHOD'], 'POST');
+}
