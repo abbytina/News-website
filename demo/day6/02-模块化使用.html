@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模块化的初步使用</title>
+	<script src="js/require/require.js"></script>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+	require(['js/a.js','js/b','c']);  //注意路径的问题  模块文件的路径是相对于当前调用者而言 
+	// 因为模块是可以调用 或是引用多个的，因为这个地方是一个[]
+</script>
