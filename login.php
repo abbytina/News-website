@@ -23,7 +23,7 @@ if (!isset($_POST['email']) || empty($_POST['email'])) {
     } else {
         $res['code'] = 0;
         $res['msg'] = '登录成功';
-        session_start();
+        session_start(['cookie_lifetime' => 86400]);
         $_SESSION['userInfo'] = $query[0];
     }
 }
