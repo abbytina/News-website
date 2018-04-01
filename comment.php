@@ -29,17 +29,18 @@ class Comment
             return Utils::formatApi(1, '文章内容不能为空');
         }
         $userInfo = Utils::getUserInfo();
-        if (empty($postId) || empty(query("SELECT * FROM posts where id = {$postId}"))) {
+        $query = query("SELECT * FROM posts where id = {$postId}");
+        if (empty($postId) || empty($query)) {
             return Utils::formatApi(1, '文章不存在');
         }
-        $data = [
+        $data = array(
             'author' => $userInfo['nickname'],
             'email' => $userInfo['email'],
             'created' => date('Y-m-d H:i:s'),
             'content' => $content,
             'status' => 'held',
             'post_id' => $postId,
-        ];
+        );
         if (!insert('comments', $data)) {
             return Utils::formatApi(1, '评论失败');
         }

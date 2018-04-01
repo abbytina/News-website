@@ -6,12 +6,10 @@
  * Time: 0:07
  */
 require_once 'functions.php';
-// $res = [
-//     'code' => 1,
-//     'msg' => ''
-// ];
-$res  = array('code' => 1, 'msg' => '' );
-
+$res = array(
+    'code' => 1,
+    'msg' => ''
+);
 if (!isset($_POST['email']) || empty($_POST['email'])) {
     $res['msg'] = '邮箱不能为空';
 } else if (!isset($_POST['password']) || empty($_POST['password'])) {

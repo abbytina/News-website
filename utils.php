@@ -7,13 +7,13 @@
  */
 class Utils
 {
-    public static function formatApi($code, $msg = '', $data = null, $extends = [])
+    public static function formatApi($code, $msg = '', $data = null, $extends = array())
     {
-        $arr = [
+        $arr = array(
             'code' => $code,
             'msg' => $msg,
-            'data' => []
-        ];
+            'data' => array()
+        );
         if (!is_null($data)) {
             $arr['data'] = $data;
         }
@@ -49,7 +49,8 @@ class Utils
      */
     public static function isLogin()
     {
-        return empty(self::session('userInfo'));
+        $session = self::session('userInfo');
+        return empty($session);
     }
 
     public static function getUserInfo()
