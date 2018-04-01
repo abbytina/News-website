@@ -6,10 +6,12 @@
  * Time: 0:07
  */
 require_once 'functions.php';
-$res = [
-    'code' => 1,
-    'msg' => ''
-];
+// $res = [
+//     'code' => 1,
+//     'msg' => ''
+// ];
+$res  = array('code' => 1, 'msg' => '' );
+
 if (!isset($_POST['email']) || empty($_POST['email'])) {
     $res['msg'] = '邮箱不能为空';
 } else if (!isset($_POST['password']) || empty($_POST['password'])) {
@@ -23,7 +25,8 @@ if (!isset($_POST['email']) || empty($_POST['email'])) {
     } else {
         $res['code'] = 0;
         $res['msg'] = '登录成功';
-        session_start(['cookie_lifetime' => 86400]);
+        // session_start(['cookie_lifetime' => 86400]);
+        session_start(array('cookie_lifetime' =>86400));
         $_SESSION['userInfo'] = $query[0];
     }
 }

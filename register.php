@@ -16,12 +16,13 @@ if (isPost()) {
         if (!empty($row)) {
             $msg = '该帐号已存在';
         } else {
-            $data = [
-                'slug' => $email,
-                'email' => $email,
-                'password' => $password,
-                'nickname' => $username,
-            ];
+            // $data = [
+            //     'slug' => $email,
+            //     'email' => $email,
+            //     'password' => $password,
+            //     'nickname' => $username,
+            // ];
+            $data = array('slug' =>$email,'email' =>$email,'password' =>$password,'nickname' =>$username);
             if (!insert('users', $data)) {
                 $msg = '注册失败';
             } else {
