@@ -17,7 +17,7 @@ if (isPost()) {
             $msg = '该帐号已存在';
         } else {
             $data = [
-                    'slug' => $email,
+                'slug' => $email,
                 'email' => $email,
                 'password' => $password,
                 'nickname' => $username,
