@@ -5,6 +5,7 @@
  * Date: 2018/3/31
  * Time: 21:12
  */
+ header('content-type:text/html;charset=utf-8');
 class Utils
 {
     public static function formatApi($code, $msg = '', $data = null, $extends = array())

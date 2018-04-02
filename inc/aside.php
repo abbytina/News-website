@@ -1,28 +1,7 @@
 <div class="aside">
       <div class="widgets">
-        <h4>账号登录</h4>
-        <div class="body search">
-        <div class="form-group">
-        <label for="email" class="sr-only">邮箱</label>
-        <input id="email" name="email" value="" type="email" class="form-control" placeholder="邮箱" autofocus>
-      </div>
-      <div class="form-group">
-        <label for="password" class="sr-only">密码</label>
-        <input id="password" name="password" value="" type="password" class="form-control" placeholder="密码">
-      </div>
-      <div>
-      <input type="submit" class="" value="登录">
-      </div>
-      
-      <div>
-        <span>还没有账号？点击</span><a>立即注册！</a>
-      </div>
-          <!-- <form>
-            <input type="text" class="keys" placeholder="邮箱">
-            <input type="submit" class="btn" value="">
-            <input type="password" class="" placeholder="密码">
-          </form> -->
-        </div>
+      <h4>主题</h4>
+       <a href="https://www.baidu.com/"><img src="../uploads/cloud_2.jpg" alt=""></a>
       </div>
       <div class="widgets">
         <h4>随机推荐</h4>

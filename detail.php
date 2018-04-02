@@ -1,5 +1,7 @@
 <?php
+header('content-type:text/html;charset=utf-8');
 require_once './functions.php';
+error_reporting(0);
 /**
  * 获取文章详情
  * @param $postId

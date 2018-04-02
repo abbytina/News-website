@@ -632,15 +632,24 @@ img {
   text-align: center;
   font-size: 12px;
 }
-
 .header .slink a {
   color: #999;
   text-decoration: none;
 }
 
-.header .slink a:hover {
-  color: #666;
+.header .lg_slink {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 20px;
 }
+.header .lg_slink a {
+  color: #61b3e5;
+  text-decoration: none;
+  
+}
+
+
+
 
 .content {
   padding: 20px;
