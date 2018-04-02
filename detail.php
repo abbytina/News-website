@@ -238,6 +238,44 @@ $sites[2]['value'] = $postDetail['title'];
             }
             ?>
         </div>
+        <!-- 登录前的评论 -->
+      <div class="comment">
+        <h3 class="title" id="comments">
+        <div class="text-muted pull-right">
+        </div>
+        <strong>评论 <b> 0 </b></strong>
+        </h3>
+        <div id="respond" class="no_webshot">
+        <div class="comment-signarea">
+        <h3 class="text-muted">评论前必须登录！</h3>
+        <a class="btn btn-default" target="_blank" href="login.php">登陆</a>
+        <a class="btn btn-default" target="_blank" href="register.php">注册</a>
+        </div>
+        </div>
+      </div>
+      <!-- 登录后的评论效果 -->
+      <div class="comment">
+        <h3 class="title" id="comments">
+        <div class="text-muted pull-right">
+        </div>
+        <strong>评论 <b> 0 </b></strong>
+        </h3>
+        <div id="respond" class="no_webshot">
+        <div class="comment-signarea">
+        <textarea class="box-textarea" id="J_Textarea" placeholder="说两句吧..."></textarea>
+        <input type="submit" class="" value="评论">
+        </div>
+        </div>    
+      </div>
+      <!-- 评论列表 -->
+      <div class="comment">
+        <strong>评论列表</strong>
+            <div>
+              <p>小红说：</p>
+              <p>这条新闻不错</p>
+            </div>    
+      </div>
+        <!-- 热门推荐 -->
       <div class="panel hots">
         <h3>热门推荐</h3>
         <ul>

@@ -986,6 +986,7 @@ img {
 .content .extra {
   font-size: 12px;
   color: #999;
+  padding-top: 20px;
 }
 
 .content .extra .fa {
@@ -1057,6 +1058,11 @@ img {
   background-color: #fff;
 }
 
+.content .comment {
+  /* padding: 20px; */
+  margin-bottom: 20px;
+  background-color: #fff;
+}
 .content .breadcrumb dt,
 .content .breadcrumb dd {
   display: inline-block;

@@ -77,7 +77,7 @@ $json = query("SELECT `value` FROM options WHERE `key` = 'nav_menus'");
 // exit;
 //1. 导航完成
 $lists = json_decode($json[0]['value'], true);
-$sites[2]['value'] = $postDetail['title'];
+// $sites[2]['value'] = $postDetail['title'];
 ?>
 <?php include './inc/head.php' ?>
 <ul class="pagination pagination-sm pull-right">

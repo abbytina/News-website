@@ -20,7 +20,7 @@
       </ul>
     </div>
     <div class="header">
-      <h1 class="logo"><a href="index.html"><img src="assets/img/logo.png" alt=""></a></h1>
+      <h1 class="logo"><a href="index.php"><img src="assets/img/logo.png" alt=""></a></h1>
       <ul class="nav">
         <?php foreach($lists as $key => $vals){?>
           <li><a href="<?php echo $vals['link']?>"><i class="<?php echo $vals['icon']?>"></i><?php echo $vals['title']?></a></li>

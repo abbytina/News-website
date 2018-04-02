@@ -40,26 +40,24 @@ if (isPost()) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>register</title>
- 
 </head>
 <body>
-  <div class="login">
-    <form class="login-wrap" action="" method="post">
-      <div class="form-group">
-     
-        <input id="email" name="email" value="" type="email"  placeholder="邮箱" autofocus >
+  <div class="register">
+    <form class="register-wrap" action="">
+      <div class="register-group">
+        <input  name="email" value="" type="email"  placeholder="邮箱" autofocus >
       </div>
-      <div class="login-wrap">
-     
-        <input id="username" name="username" value="" type="text" placeholder="用户名" required>
+      <div class="register-wrap">   
+        <input  name="username" value="" type="text" placeholder="用户名" >
       </div>
-      <div class="login-wrap">
-      
-        <input id="password" name="password" value="" type="password"  placeholder="密码" required>
+      <div class="register-wrap">  
+        <input name="password" value="" type="password"  placeholder="密码" >
       </div>
-      <input type="submit" class="btn btn-primary btn-block" value="注册">
-      <a href=""class="btn btn-primary btn-block" value="返回"></a>
+      <input type="submit" class="" value="注册">
     </form>
+    <div>
+      <a href="index.php">返回首页</a>
+    </div>
   </div>
 </body>
 </html>
