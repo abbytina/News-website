@@ -16,9 +16,9 @@
     $data = json_decode($rows[0]['value'],true);
 
     $sites = query('SELECT * from options where id < 9');
-
+    // 文章内容
     $contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id DESC limit 0,8");
-
+    // $contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id ");
     // print_r($contents);
     // exit;
  ?>
@@ -116,7 +116,7 @@
         <div class="entry">
           <div class="head">
             <span class="sort"><?php echo $vals['name']?></span>
-            <a href="detail.php?id=<?= $vals['id'] ?>"><?php echo $vals['title']?></a>
+            <a href="detail.php?id=<?php echo $vals['id'] ?>"><?php echo $vals['title']?></a>
           </div>
           <div class="main">
             <p class="info">admin 发表于 <?php echo $vals['created']?></p>
