@@ -36,7 +36,7 @@
         <a href="javascript:;">微博</a> | <a href="javascript:;">公众号</a>
       </div>
       <div class="lg_slink">
-        <a href="/login.php">登录</a> | <a href="/register.php">注册</a>
+        <a href="/login.html">登录</a> | <a href="/register.php">注册</a>
       </div>
       
     </div>

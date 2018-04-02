@@ -53,7 +53,7 @@ if (isPost()) {
       <div class="register-wrap">  
         <input name="password" value="" type="password"  placeholder="密码" >
       </div>
-      <input type="submit" class="" value="注册">
+      <input type="button" class="register" value="注册">
     </form>
     <div>
       <a href="index.php">返回首页</a>
@@ -61,3 +61,32 @@ if (isPost()) {
   </div>
 </body>
 </html>
+<script src="./assets/vendors/jquery/jquery.min.js">
+  
+</script>
+<script>
+  $(".register").click(function() {
+    // 先获取uName和pwd的值
+    // var uName = $("#uName").val();
+    // var pwd = $("#pwd").val();
+    // var dataStr = "uName="+uName+"pwd="+pwd; //（数据的序列化）
+
+  //如果要将表单中的所有数据进行键值对的处理
+  var dataStr  = $(".register-wrap").serialize();
+    $.ajax({
+      type:"POST",
+      url:"register.php",
+      dataType:"json",
+      data:dataStr,
+      success:function(data){
+        // 判断状态
+        if(data.status == 0) {
+        alert(data.msg);
+        // window.location.href= '/index.php'; //js下的页面跳转
+      } else {
+        alert(data.msg);
+      }
+      }
+    });
+  });
+  </script>

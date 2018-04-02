@@ -166,24 +166,24 @@
     })
 
     // 3 点击标题标签切换显示对应内容 
-    var box = document.getElementsByClassName("swipe-wrapper");//获取滑动标签最外层元素
-    // console.log(box);
-    var olis = box.getElementsByTagName("li"); //获取标签元素
-    // console.log(olis);
-    //构建循环，获取每一个标签
-    for(var i=0; i<olis.length; i++) {
-        //给每一个标签设置一个序号属性
-        olis[i].index = i;
-        //给每一个标签绑定点击事件
-        olis[i].onclick = function () {
-            //清除所有标签样式
-            for(var j=0; j<olis.length; j++) {
-                olis[j].className="";
-            }
-            //给当前点击的标签加上样式
-            this.className="active";
-           }
-    }
+    // var box = document.getElementsByClassName("swipe-wrapper");//获取滑动标签最外层元素
+    // // console.log(box);
+    // var olis = box.getElementsByTagName("li"); //获取标签元素
+    // // console.log(olis);
+    // //构建循环，获取每一个标签
+    // for(var i=0; i<olis.length; i++) {
+    //     //给每一个标签设置一个序号属性
+    //     olis[i].index = i;
+    //     //给每一个标签绑定点击事件
+    //     olis[i].onclick = function () {
+    //         //清除所有标签样式
+    //         for(var j=0; j<olis.length; j++) {
+    //             olis[j].className="";
+    //         }
+    //         //给当前点击的标签加上样式
+    //         this.className="active";
+    //        }
+    // }
 
   </script>
 </body>

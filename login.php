@@ -7,6 +7,7 @@
  */
 require_once 'functions.php';
 $res = array(
+  // 响应的状态码：0:登录成功  1：登录失败
     'code' => 1,
     'msg' => ''
 );
@@ -26,6 +27,10 @@ if (!isset($_POST['email']) || empty($_POST['email'])) {
         // session_start(['cookie_lifetime' => 86400]);
         session_start(array('cookie_lifetime' =>86400));
         $_SESSION['userInfo'] = $query[0];
+        header('location:index.php');  //php中页面跳转
+        exit;
+        // header('location:/index.php');  //php中页面跳转
+        
     }
 }
 
@@ -33,28 +38,3 @@ header('Content-type: application/json');
 echo json_encode_no_zh($res);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>login</title>
-</head>
-<body>
-  <div class="login">
-    <form class="login-wrap" action="">
-      <div class="login-group">
-        <input  name="email" value="" type="email"  placeholder="邮箱" autofocus >
-      </div>
-      <div class="login-wrap">  
-        <input name="password" value="" type="password"  placeholder="密码" >
-      </div>
-      <input type="submit" class="" value="注册">
-    </form>
-    <div>
-      <a href="index.php">返回首页</a>
-    </div>
-  </div>
-</body>
-</html>
