@@ -9,7 +9,9 @@ header('content-type:text/html;charset=utf-8');
  */
 require_once 'functions.php';
 if (!isset($_GET['keyword']) || empty($_GET['keyword'])) {
-    exit("请输入关键字");
+    echo '页面不存在';
+    exit();
+    // exit("请输入关键字");
 }
 $keyword = $_GET['keyword'];
 // $total = 106;// 当前数据库里面有106条数据
@@ -65,7 +67,7 @@ $pages = range($start < 1 ? 1 : $start, $end);
 $offset = ($pageCurrent - 1) * $pageSize;
 // $lists = query('SELECT * FROM posts');
 // $lists = query('SELECT * FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id');
-$sql = "SELECT posts.id,posts.title,posts.category_id,posts.created,
+$sql = "SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,
 posts.status,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id 
 LEFT JOIN categories on posts.category_id = categories.id WHERE title LIKE '%{$keyword}%' LIMIT {$offset}, {$pageSize}";
 $postLists = query($sql);
@@ -79,58 +81,55 @@ $json = query("SELECT `value` FROM options WHERE `key` = 'nav_menus'");
 $lists = json_decode($json[0]['value'], true);
 // $sites[2]['value'] = $postDetail['title'];
 ?>
-<?php include './inc/head.php' ?>
-<ul class="pagination pagination-sm pull-right">
-    <li><a href="/admin/posts.php?page=<?php echo $prevPage ?>">上一页</a></li>
-    <?php foreach ($pages as $key => $val) { ?>
-        <?php if ($pageCurrent == $val) { ?>
-            <li class="active"><a href="/admin/posts.php?page=<?php echo $val ?>"><?php echo $val ?></a></li>
-        <?php } else { ?>
-            <li><a href="/admin/posts.php?page=<?php echo $val ?>"><?php echo $val ?></a></li>
-        <?php } ?>
-    <?php } ?>
-    <li><a href="/admin/posts.php?page=<?php echo $nextPage ?>">下一页</a></li>
-</ul>
-<table class="table table-striped table-bordered table-hover">
-    <thead>
-    <tr>
-        <th class="text-center" width="40">
-            编号
-        </th>
-        <th>标题</th>
-        <th>作者</th>
-        <th>分类</th>
-        <th class="text-center">发表时间</th>
-        <th class="text-center">状态</th>
-        <th class="text-center" width="100">操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-    print_r($postLists);
-    foreach ($postLists as $key => $vals) { ?>
-        <tr>
-            <td class="text-center">
-                <?php echo $vals['id'] ?>
-            </td>
-            <td><?php echo $vals['title'] ?></td>
-            <td><?php echo $vals['nickname'] ?></td>
-            <?php if (empty($vals['name'])) { ?>
-                <td>未分类</td>
-            <?php } else { ?>
-                <td><?php echo $vals['name'] ?></td>
-            <?php } ?>
-            <td class="text-center"><?php echo $vals['created'] ?></td>
-            <?php if ($vals['status'] == 'published') { ?>
-                <td class="text-center">已发布</td>
-            <?php } else { ?>
-                <td class="text-center">草稿</td>
-            <?php } ?>
-            <td class="text-center">
-                <a href="/admin/post-add.php?action=edit&pid=<?php echo $vals['id'] ?>" class="btn btn-default btn-xs">编辑</a>
-                <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
-            </td>
-        </tr>
-    <?php } ?>
-    </tbody>
-</table>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.css">
+</head>
+<body>
+  <div class="wrapper">
+   
+    <?php include './inc/head.php'?>
+
+    <?php include './inc/aside.php'?>
+
+    <div class="content">
+      <div class="panel new">
+        <h3>搜索结果</h3>
+        <?php foreach($postLists as $key => $vals){ ?>
+        <div class="entry">
+          <div class="head">
+            <a href="detail.php?id=<?php echo $vals['id'] ?>"><?php echo $vals['title']?></a>
+          </div>
+          <div class="main">
+            <p class="info"><?php echo $vals['nickname']?>  发表于 <?php echo $vals['created']?></p>
+            <p class="brief"><?php echo $vals['content']?></p>
+            <p class="extra">
+              <span class="reading">阅读(3406)</span>
+              <span class="comment">评论(0)</span>
+              <a href="javascript:;" class="like">
+                <i class="fa fa-thumbs-up"></i>
+                <span>赞(167)</span>
+              </a>
+              <a href="javascript:;" class="tags">
+                分类：<span><?php echo $vals['name']?></span>
+              </a>
+            </p>
+            <a href="javascript:;" class="thumb">
+              <img src=<?php echo $vals['feature']?> alt="">
+            </a>
+          </div>
+        </div>
+        <?php }?>
+      </div>
+    </div>
+   
+  </div>
+  <?php include './inc/footer.php'?>
+</body>
+</html>
