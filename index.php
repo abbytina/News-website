@@ -22,14 +22,13 @@
     // print_r($contents);
     // exit;
  ?>
-
 <?php include './inc/head.php'?>
     <?php include './inc/aside.php'?>
     <div class="content">
       <div class="swipe">
         <ul class="swipe-wrapper">
         <?php foreach($data as $key =>$vals){ ?>
-          <li>
+          <li class="active">
             <a href="#">
               <img src="<?php echo $vals['image']?>">
               <span><?php echo $vals['text']?></span>
@@ -119,7 +118,7 @@
             <a href="detail.php?id=<?php echo $vals['id'] ?>"><?php echo $vals['title']?></a>
           </div>
           <div class="main">
-            <p class="info">admin 发表于 <?php echo $vals['created']?></p>
+            <p class="info"><?php echo $vals['nickname']?>  发表于 <?php echo $vals['created']?></p>
             <p class="brief"><?php echo $vals['content']?></p>
             <p class="extra">
               <span class="reading">阅读(3406)</span>
@@ -145,7 +144,7 @@
   </div>
   <?php include './inc/script.php'?>
   <script>
-    //
+    // 1 显示自己 隐藏其他
     var swiper = Swipe(document.querySelector('.swipe'), {
       auto: 2000,
       transitionEnd: function (index) {
@@ -155,7 +154,7 @@
       }
     });
 
-    // 上/下一张
+    // 2 上/下一张
     $('.swipe .arrow').on('click', function () {
       var _this = $(this);
 
@@ -165,6 +164,27 @@
         swiper.next();
       }
     })
+
+    // 3 点击标题标签切换显示对应内容 
+    var box = document.getElementsByClassName("swipe-wrapper");//获取滑动标签最外层元素
+    // console.log(box);
+    var olis = box.getElementsByTagName("li"); //获取标签元素
+    // console.log(olis);
+    //构建循环，获取每一个标签
+    for(var i=0; i<olis.length; i++) {
+        //给每一个标签设置一个序号属性
+        olis[i].index = i;
+        //给每一个标签绑定点击事件
+        olis[i].onclick = function () {
+            //清除所有标签样式
+            for(var j=0; j<olis.length; j++) {
+                olis[j].className="";
+            }
+            //给当前点击的标签加上样式
+            this.className="active";
+           }
+    }
+
   </script>
 </body>
 </html>
