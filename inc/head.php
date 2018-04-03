@@ -33,10 +33,9 @@
         </form>
       </div>
       <div class="slink">
-        <a href="javascript:;">微博</a> | <a href="javascript:;">公众号</a>
+        <a href="javascript:;">微博&nbsp;<i class="fa fa-weibo"></i></a> | <a href="javascript:;">公众号&nbsp;<i class="fa fa-wechat"></i></a>
       </div>
       <div class="lg_slink">
-        <a href="/login.html">登录</a> | <a href="/register.php">注册</a>
+        <a href="/login.html">登录&nbsp;<i class="fa fa-sign-in"></i></a> | <a href="/register.php">注册&nbsp;<i class="fa fa-envelope-square"></i></a>
       </div>
-      
     </div>

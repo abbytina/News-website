@@ -16,6 +16,7 @@ SELECT
   p.title,
   p.content,
   p.views,
+  p.created,
   p.category_id,
   c.name AS c_name,
   u.nickname AS nickname
@@ -55,6 +56,11 @@ if (!isset($_GET['id'])) {
 }
 $postDetail = get_post_detail($_GET['id']);
 
+  // 热门推荐内容
+  // 热门排行 按点击数（阅读数）查询 
+  $hot_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY views DESC limit 0,3");
+  // print_r($hot_contents);
+  // exit;
 ?>
 <?php
 $json = query("SELECT `value` FROM options WHERE `key` = 'nav_menus'");
@@ -136,30 +142,14 @@ $sites[2]['value'] = $postDetail['title'];
       <div class="panel hots">
         <h3>热门推荐</h3>
         <ul>
+        <?php foreach($hot_contents as $key =>$vals){ ?>
           <li>
-            <a href="javascript:;">
-              <img src="uploads/hots_2.jpg" alt="">
-              <span>星球大战:原力觉醒视频演示 电影票68</span>
+            <a href="detail.php?id=<?php echo $vals['id'] ?>">
+              <img src=<?php echo $vals['feature']?> alt="">
+              <span><?php echo $vals['title']?></span>
             </a>
           </li>
-          <li>
-            <a href="javascript:;">
-              <img src="uploads/hots_3.jpg" alt="">
-              <span>你敢骑吗？全球第一辆全功能3D打印摩托车亮相</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="uploads/hots_4.jpg" alt="">
-              <span>又现酒窝夹笔盖新技能 城里人是不让人活了！</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="uploads/hots_5.jpg" alt="">
-              <span>实在太邪恶！照亮妹纸绝对领域与私处</span>
-            </a>
-          </li>
+        <?php }?>
         </ul>
       </div>
     </div>

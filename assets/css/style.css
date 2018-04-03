@@ -634,7 +634,7 @@ img {
 
 .header .slink {
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
 }
 .header .slink a {
   color: #999;
@@ -643,15 +643,17 @@ img {
 
 .header .lg_slink {
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 20px;
 }
 .header .lg_slink a {
   color: #61b3e5;
   text-decoration: none;
-  
 }
-
+.header .lg_slink a:hover{
+  color: #999;
+  text-decoration:underline;
+}
 .content {
   padding: 20px;
   margin: 0 300px 0 190px;
@@ -841,13 +843,15 @@ img {
 }
 
 .content .top li:nth-child(2) i {
-  background-color: #7fd75a;
+  background-color: #ffac38;
 }
 
 .content .top li:nth-child(3) i {
   background-color: #60c4fd;
 }
-
+.content .top li a i.fa-fire {
+  background-color: #60c4fd;
+}
 .content .top a {
   color: #444;
 }
@@ -1195,14 +1199,26 @@ img {
 
 .aside .random .title {
   width: 160px;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 300;
   color: #444;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.aside .random .title:hover {
+  overflow: visible;
+}
+.aside .random .reading {
+  font-size: 14px;
+  color: #61b3e5;
+  padding-top: 10px;
+}
+.aside .random .reading i {
+  font-size: 12px;
+  color: #61b3e5;
 }
 
-.aside .random .reading {
-  font-size: 12px;
-  color: #999;
-}
 
 .aside .random .pic {
   display: inline-block;

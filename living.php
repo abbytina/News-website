@@ -12,7 +12,7 @@ $lists = json_decode($json[0]['value'],true);
 
 // 查询趣生活的文章内容
 // $live_contents = query("SELECT id,title,category_id,created,content,feature FROM posts WHERE category_id = '4' ORDER BY id DESC limit 0,8");
-$live_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id WHERE category_id = '4' ORDER BY id DESC limit 0,10");
+$live_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id WHERE category_id = '4' ORDER BY id DESC limit 0,10");
   // print_r($live_contents);
   // exit;
 ?>
@@ -43,14 +43,9 @@ $live_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.crea
           </div>
           <div class="main">
             <p class="info"><?php echo $vals['nickname']?>  发表于 <?php echo $vals['created']?></p>
-            <p class="brief"><?php echo $vals['content']?></p>
+            <p class="brief"><?php echo $vals['slug']?></p>
             <p class="extra">
-              <span class="reading">阅读(3406)</span>
-              <span class="comment">评论(0)</span>
-              <a href="javascript:;" class="like">
-                <i class="fa fa-thumbs-up"></i>
-                <span>赞(167)</span>
-              </a>
+              <span class="reading">阅读(<?php echo $vals['views']?>)</span>             
               <a href="javascript:;" class="tags">
                 分类：<span><?php echo $vals['name']?></span>
               </a>

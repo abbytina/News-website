@@ -1,6 +1,9 @@
 <?php 
+header('content-type:text/html;charset=utf-8');
     // echo __DIR__; //获取当前的绝对路径
     require './functions.php';
+    // 热门排行序号
+    $i = 1;
    $json = query("SELECT `value` FROM options WHERE `key` = 'nav_menus'");
     // print_r($lists);
     // exit;
@@ -17,9 +20,13 @@
 
     $sites = query('SELECT * from options where id < 9');
     // 文章内容
-    $contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id DESC limit 0,8");
+    $contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id DESC limit 0,8");
     // $contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id ");
     // print_r($contents);
+    // exit;
+    // 热门排行 按点击数（阅读数）查询 
+    $hot_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY views DESC limit 0,5");
+    // print_r($hot_contents);
     // exit;
  ?>
 <?php include './inc/head.php'?>
@@ -46,39 +53,18 @@
       </div>
     
       <div class="panel top">
-        <h3>一周热门排行</h3>
+        <h3>热门排行</h3>      
         <ol>
+        <?php foreach($hot_contents as $key =>$vals){ ?>
           <li>
-            <i>1</i>
-            <a href="javascript:;">你敢骑吗？全球第一辆全功能3D打印摩托车亮相</a>
-            <a href="javascript:;" class="like">赞(964)</a>
-            <span>阅读 (18206)</span>
+            <i><?php echo $i++ ?></i>
+            <a href="detail.php?id=<?php echo $vals['id'] ?>"><?php echo $vals['title']?></a>
+            <a href="javascript:;" class="like"><i class="fa fa-fire"></i></a>
+            <span>阅读 (<?php echo $vals['views']?>)</span>
           </li>
-          <li>
-            <i>2</i>
-            <a href="javascript:;">又现酒窝夹笔盖新技能 城里人是不让人活了！</a>
-            <a href="javascript:;" class="like">赞(964)</a>
-            <span class="">阅读 (18206)</span>
-          </li>
-          <li>
-            <i>3</i>
-            <a href="javascript:;">实在太邪恶！照亮妹纸绝对领域与私处</a>
-            <a href="javascript:;" class="like">赞(964)</a>
-            <span>阅读 (18206)</span>
-          </li>
-          <li>
-            <i>4</i>
-            <a href="javascript:;">没有任何防护措施的摄影师在水下拍到了这些画面</a>
-            <a href="javascript:;" class="like">赞(964)</a>
-            <span>阅读 (18206)</span>
-          </li>
-          <li>
-            <i>5</i>
-            <a href="javascript:;">废灯泡的14种玩法 妹子见了都会心动</a>
-            <a href="javascript:;" class="like">赞(964)</a>
-            <span>阅读 (18206)</span>
-          </li>
+          <?php }?>
         </ol>
+      
       </div>
       <div class="panel new">
         <h3>最新发布</h3>
@@ -90,13 +76,11 @@
           </div>
           <div class="main">
             <p class="info"><?php echo $vals['nickname']?>  发表于 <?php echo $vals['created']?></p>
-            <p class="brief"><?php echo $vals['content']?></p> 
+            <p class="brief"><?php echo $vals['slug']?></p> 
             <p class="extra">
-              <span class="reading">阅读(3406)</span>
-              <span class="comment">评论(0)</span>
+              <span class="reading">阅读(<?php echo $vals['views']?>)</span>
               <a href="javascript:;" class="like">
-                <i class="fa fa-thumbs-up"></i>
-                <span>赞(167)</span>
+                <i class="fa fa-hand-o-right"></i>
               </a>
               <a href="javascript:;" class="tags">
                 分类：<span><?php echo $vals['name']?></span>

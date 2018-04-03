@@ -26,7 +26,7 @@ $pl_contents = query("SELECT comments.id,comments.author,comments.email,comments
           <li>
             <a href="detail.php?id=<?php echo $vals['id'] ?>">
               <p class="title"><?php echo $vals['title']?></p>
-              <p class="reading">☝</p>
+              <p class="reading"><i class="fa fa-paper-plane"></i></p>
               <div class="pic">
                 <img src=<?php echo $vals['feature']?> alt="">
               </div>
