@@ -8,7 +8,7 @@ $ss_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.create
   // exit;
 
 // 最新评论
-$pl_contents = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content FROM comments ORDER BY rand() DESC limit 0,5");
+$pl_contents = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content FROM comments ORDER BY id DESC limit 0,5");
 // print_r($pl_contents);
 // exit;
 
@@ -37,85 +37,22 @@ $pl_contents = query("SELECT comments.id,comments.author,comments.email,comments
       </div>
       <div class="widgets">
         <h4>最新评论</h4>
+        <?php foreach($pl_contents as $key => $vals){ ?>
         <ul class="body discuz">
           <li>
             <a href="javascript:;">
               <div class="avatar">
-                <img src="uploads/avatar_1.jpg" alt="">
+                <img src="/assets/img/default.png" alt="">
               </div>
               <div class="txt">
                 <p>
-                  <span>鲜活</span>9个月前(08-14)说:
+                  <span><?php echo $vals['author']?></span>说:
                 </p>
-                <p>挺会玩的</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <div class="avatar">
-                <img src="uploads/avatar_1.jpg" alt="">
-              </div>
-              <div class="txt">
-                <p>
-                  <span>鲜活</span>9个月前(08-14)说:
-                </p>
-                <p>挺会玩的</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <div class="avatar">
-                <img src="uploads/avatar_2.jpg" alt="">
-              </div>
-              <div class="txt">
-                <p>
-                  <span>鲜活</span>9个月前(08-14)说:
-                </p>
-                <p>挺会玩的</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <div class="avatar">
-                <img src="uploads/avatar_1.jpg" alt="">
-              </div>
-              <div class="txt">
-                <p>
-                  <span>鲜活</span>9个月前(08-14)说:
-                </p>
-                <p>挺会玩的</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <div class="avatar">
-                <img src="uploads/avatar_2.jpg" alt="">
-              </div>
-              <div class="txt">
-                <p>
-                  <span>鲜活</span>9个月前(08-14)说:
-                </p>
-                <p>挺会玩的</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <div class="avatar">
-                <img src="uploads/avatar_1.jpg" alt="">
-              </div>
-              <div class="txt">
-                <p>
-                  <span>鲜活</span>9个月前(08-14)说:
-                </p>
-                <p>挺会玩的</p>
+                <p><?php echo $vals['content']?></p>
               </div>
             </a>
           </li>
         </ul>
+        <?php }?>
       </div>
     </div>
