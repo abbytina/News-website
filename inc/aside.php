@@ -1,3 +1,19 @@
+<?php
+// require './functions.php';
+// 查询趣生活的文章内容
+// $live_contents = query("SELECT id,title,category_id,created,content,feature FROM posts WHERE category_id = '4' ORDER BY id DESC limit 0,8");
+// 随机推荐
+$ss_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id  ORDER BY rand() DESC limit 0,5");
+  // print_r($ss_contents);
+  // exit;
+
+// 最新评论
+$pl_contents = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content FROM comments ORDER BY rand() DESC limit 0,5");
+// print_r($pl_contents);
+// exit;
+
+?>
+
 <div class="aside">
       <div class="widgets">
       <h4>主题</h4>
@@ -5,53 +21,19 @@
       </div>
       <div class="widgets">
         <h4>随机推荐</h4>
+        <?php foreach($ss_contents as $key => $vals){ ?>
         <ul class="body random">
           <li>
-            <a href="javascript:;">
-              <p class="title">废灯泡的14种玩法 妹子见了都会心动</p>
-              <p class="reading">阅读(819)</p>
+            <a href="detail.php?id=<?php echo $vals['id'] ?>">
+              <p class="title"><?php echo $vals['title']?></p>
+              <p class="reading">☝</p>
               <div class="pic">
-                <img src="uploads/widget_1.jpg" alt="">
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <p class="title">可爱卡通造型 iPhone 6防水手机套</p>
-              <p class="reading">阅读(819)</p>
-              <div class="pic">
-                <img src="uploads/widget_2.jpg" alt="">
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <p class="title">变废为宝！将手机旧电池变为充电宝的Better</p>
-              <p class="reading">阅读(819)</p>
-              <div class="pic">
-                <img src="uploads/widget_3.jpg" alt="">
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <p class="title">老外偷拍桂林芦笛岩洞 美如“地下彩虹”</p>
-              <p class="reading">阅读(819)</p>
-              <div class="pic">
-                <img src="uploads/widget_4.jpg" alt="">
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <p class="title">doge神烦狗打底南瓜裤 就是如此魔性</p>
-              <p class="reading">阅读(819)</p>
-              <div class="pic">
-                <img src="uploads/widget_5.jpg" alt="">
+                <img src=<?php echo $vals['feature']?> alt="">
               </div>
             </a>
           </li>
         </ul>
+        <?php }?>
       </div>
       <div class="widgets">
         <h4>最新评论</h4>

@@ -24,17 +24,20 @@ if (!isset($_POST['email']) || empty($_POST['email'])) {
     } else {
         $res['code'] = 0;
         $res['msg'] = '登录成功';
-        // session_start(['cookie_lifetime' => 86400]);
+
+        // session_start();//使用session之前一定要先启用session
+        // $_SESSION['user_info'] = $query; //把用户的登陆信息存到session当中,随响应头发送给浏览器，存到浏览器的cookie当中
+        // header('location:/admin');  //php中页面跳转
+
         session_start(array('cookie_lifetime' =>86400));
         $_SESSION['userInfo'] = $query[0];
-        header('location:index.php');  //php中页面跳转
-        exit;
-        // header('location:/index.php');  //php中页面跳转
-        
+        // header('location:/index');  //php中页面跳转
+        // exit;
+        echo "<script>window.location.href='/index.php'</script>";
     }
 }
 
 header('Content-type: application/json');
-echo json_encode_no_zh($res);
+// echo json_encode_no_zh($res);
 ?>
 

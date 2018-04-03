@@ -8,12 +8,12 @@
 </head>
 <body>
   <div class="login">
-    <form class="login-wrap" action="" id="form">
+    <form class="login-wrap" action="/login.php" id="form">
       <div class="login-group">
-        <input  name="email" value="" type="email"  placeholder="邮箱" autofocus >
+        <input name="email" value="" type="email"  placeholder="邮箱" autofocus >
       </div>
       <div class="login-wrap">  
-        <input name="password" value="" type="password"  placeholder="密码" >
+        <input name="password" value="" type="password"  autocomplete="new-password"  placeholder="密码" >
       </div>
       <input type="button" id="lg_btn" value="提交">
     </form>

@@ -535,7 +535,7 @@ img {
 }
 
 .topnav li a.active {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .header {
@@ -574,9 +574,13 @@ img {
 .header .nav a:hover {
   color: #444;
 }
+.header .nav li a:hover {
+  color: #61b3e5;
+}
+
 
 .header .nav a.active {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .header .nav .fa {
@@ -647,9 +651,6 @@ img {
   text-decoration: none;
   
 }
-
-
-
 
 .content {
   padding: 20px;
@@ -799,7 +800,7 @@ img {
 }
 
 .content .focus li:hover span {
-  background-color: #ff5e52;
+  background-color: #61b3e5;
 }
 
 .content .focus li.large span {
@@ -852,7 +853,7 @@ img {
 }
 
 .content .top a:hover {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .content .top span,
@@ -888,7 +889,7 @@ img {
 }
 
 .content .hots li a:hover {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .content .hots li img {
@@ -938,7 +939,7 @@ img {
 }
 
 .content .panel .head a:hover {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .content .panel .head .sort {
@@ -969,7 +970,6 @@ img {
   overflow: hidden;
   margin-bottom: 8px;
 }
-
 .content .info {
   font-size: 12px;
   color: #999;
@@ -1012,7 +1012,7 @@ img {
 }
 
 .content .tags span:hover {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .content .entry p {
@@ -1079,7 +1079,7 @@ img {
 }
 
 .content .breadcrumb a:hover {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .content .article .title {
@@ -1110,7 +1110,7 @@ img {
 }
 
 .content .article .meta a:hover {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .aside {
@@ -1217,7 +1217,7 @@ img {
 }
 
 .aside .random li:hover .title {
-  color: #ff5e52;
+  color: #61b3e5;
 }
 
 .aside .discuz li {

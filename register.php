@@ -5,8 +5,9 @@ if (isPost()) {
         $msg = '请输入正确的邮箱';
     } else if (!isset($_POST['password']) || empty($_POST['password'])) {
         $msg = '请输入密码';
+       
     }  else if (!isset($_POST['username']) || empty($_POST['username'])) {
-        $msg = '请输入密码';
+        $msg = '请输入账号';
     } else {
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -25,7 +26,10 @@ if (isPost()) {
             if (!insert('users', $data)) {
                 $msg = '注册失败';
             } else {
-                echo "<html><head><meta charset=\"UTF-8\"><script>alert('注册成功');location.href = '/'</script></head></html>";
+                // echo "<html><head><meta charset=\"UTF-8\"><script>alert('注册成功');
+                // location.href = '/index.php'</script></head></html>";
+                echo "<script>alert('注册成功');
+                location.href = '/index.php'</script>";
                 exit();
             }
         }
@@ -43,17 +47,17 @@ if (isPost()) {
 </head>
 <body>
   <div class="register">
-    <form class="register-wrap" action="">
-      <div class="register-group">
-        <input  name="email" value="" type="email"  placeholder="邮箱" autofocus >
+    <form class="qq_register" action="register.php" method="post">
+        <div class="register">   
+            <input  name="username" value="" type="text"  autocomplete="off" placeholder="用户名" autofocus >
+          </div>
+      <div class="register">
+        <input  name="email" value="" type="email"  autocomplete="off" placeholder="邮箱"  >
       </div>
-      <div class="register-wrap">   
-        <input  name="username" value="" type="text" placeholder="用户名" >
+      <div class="register">  
+        <input name="password" value="" type="password" autocomplete="off" placeholder="密码" >
       </div>
-      <div class="register-wrap">  
-        <input name="password" value="" type="password"  placeholder="密码" >
-      </div>
-      <input type="button" class="register" value="注册">
+      <input  type="submit" class="reg_btn" value="注册">
     </form>
     <div>
       <a href="index.php">返回首页</a>
@@ -64,29 +68,3 @@ if (isPost()) {
 <script src="./assets/vendors/jquery/jquery.min.js">
   
 </script>
-<script>
-  $(".register").click(function() {
-    // 先获取uName和pwd的值
-    // var uName = $("#uName").val();
-    // var pwd = $("#pwd").val();
-    // var dataStr = "uName="+uName+"pwd="+pwd; //（数据的序列化）
-
-  //如果要将表单中的所有数据进行键值对的处理
-  var dataStr  = $(".register-wrap").serialize();
-    $.ajax({
-      type:"POST",
-      url:"register.php",
-      dataType:"json",
-      data:dataStr,
-      success:function(data){
-        // 判断状态
-        if(data.status == 0) {
-        alert(data.msg);
-        // window.location.href= '/index.php'; //js下的页面跳转
-      } else {
-        alert(data.msg);
-      }
-      }
-    });
-  });
-  </script>
