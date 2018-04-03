@@ -1,4 +1,5 @@
 <?php 
+header('content-type:text/html;charset=utf-8');
   /**
    * 思路：
    * 1.检测用户是否已经登陆
@@ -8,11 +9,12 @@
    */
   require '../functions.php';
   checkLogin();
+  // error_reporting(0);
     // 定义导航状态
   $active = 'comments';
 
   // $total = 106;// 当前数据库里面有106条数据
-    $total = query('SELECT count(*) AS total FROM posts');
+    $total = query('SELECT count(*) AS total FROM comments');
     // print_r($total);
     // exit;
     $total = $total[0]['total'];
@@ -63,9 +65,9 @@
     $offset  = ($pageCurrent -1) * $pageSize;
   // $lists = query('SELECT * FROM posts');
   // $lists = query('SELECT * FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id');
-  $lists = query("SELECT comments.id,posts.title,posts.category_id,posts.created,posts.status,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
-
-  // print_r($lists);
+  // $com_lists = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,comments.status FROM comments LEFT JOIN posts on comments.post_id = posts.id LEFT JOIN posts on  posts.category_id = categories.id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
+  $com_lists = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,comments.status FROM comments limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
+  // print_r($com_lists);
   // exit;
 ?>
 
@@ -95,11 +97,15 @@
           <button class="btn btn-danger btn-sm">批量删除</button>
         </div>
         <ul class="pagination pagination-sm pull-right">
-          <li><a href="#">上一页</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">下一页</a></li>
+          <li><a href="/admin/comments.php?page=<?php echo $prevPage?>">上一页</a></li>
+          <?php foreach($pages as $key => $val){?>
+            <?php if($pageCurrent == $val){ ?>
+            <li class="active"><a href="/admin/comments.php?page=<?php echo $val?>"><?php echo $val?></a></li>
+            <?php }else { ?>
+            <li><a href="/admin/comments.php?page=<?php echo $val?>"><?php echo $val?></a></li>
+            <?php }?>
+        <?php }?>
+          <li><a href="/admin/comments.php?page=<?php echo $nextPage?>">下一页</a></li>
         </ul>
       </div>
       <table class="table table-striped table-bordered table-hover">
@@ -115,42 +121,20 @@
           </tr>
         </thead>
         <tbody>
+        <?php foreach($com_lists as $key => $vals){ ?>
           <tr class="danger">
             <td class="text-center"><input type="checkbox"></td>
-            <td>大大</td>
-            <td>楼主好人，顶一个</td>
-            <td>《Hello world》</td>
-            <td>2016/10/07</td>
-            <td>未批准</td>
+            <td><?php echo $vals['author']?></td>
+            <td><?php echo $vals['content']?></td>
+            <td><?php echo $vals['content']?></td>
+            <td><?php echo $vals['created']?></td>
+            <td><?php echo $vals['status']?></td>
             <td class="text-center">
-              <a href="post-add.php" class="btn btn-info btn-xs">批准</a>
+              <a href="javascript;" class="btn btn-info btn-xs">批准</a>
               <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
             </td>
           </tr>
-          <tr>
-            <td class="text-center"><input type="checkbox"></td>
-            <td>大大</td>
-            <td>楼主好人，顶一个</td>
-            <td>《Hello world》</td>
-            <td>2016/10/07</td>
-            <td>已批准</td>
-            <td class="text-center">
-              <a href="post-add.php" class="btn btn-warning btn-xs">驳回</a>
-              <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-center"><input type="checkbox"></td>
-            <td>大大</td>
-            <td>楼主好人，顶一个</td>
-            <td>《Hello world》</td>
-            <td>2016/10/07</td>
-            <td>已批准</td>
-            <td class="text-center">
-              <a href="post-add.php" class="btn btn-warning btn-xs">驳回</a>
-              <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
-            </td>
-          </tr>
+          <?php }?>
         </tbody>
       </table>
     </div>

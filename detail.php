@@ -94,13 +94,6 @@ $sites[2]['value'] = $postDetail['title'];
               <?php echo $postDetail['content']?>
           </div>
       </div>
-        <div>
-            <?php
-            foreach (get_post_comment($_GET['id']) as $item) {
-                echo $item['author'], $item['email'], $item['created'], $item['content'], '<br>';
-            }
-            ?>
-        </div>
         <!-- 登录前的评论 -->
       <div class="comment">
         <h3 class="title" id="comments">
@@ -133,10 +126,12 @@ $sites[2]['value'] = $postDetail['title'];
       <!-- 评论列表 -->
       <div class="comment">
         <strong>评论列表</strong>
+        <?php foreach(get_post_comment($_GET['id']) as $item){ ?>
             <div>
-              <p>小红说：</p>
-              <p>这条新闻不错</p>
+              <p><?php echo $item['author']?>说：</p>
+              <p><?php echo $item['content']?></p>
             </div>    
+       <?php }?>
       </div>
         <!-- 热门推荐 -->
       <div class="panel hots">
@@ -157,5 +152,4 @@ $sites[2]['value'] = $postDetail['title'];
       <p>© 2018 奇趣新闻网站 by花花</p>
     </div>
   </div>
-</body>
-</html>
+

@@ -68,7 +68,7 @@ $offset = ($pageCurrent - 1) * $pageSize;
 // $lists = query('SELECT * FROM posts');
 // $lists = query('SELECT * FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id');
 $sql = "SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,
-posts.status,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id 
+posts.status,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id 
 LEFT JOIN categories on posts.category_id = categories.id WHERE title LIKE '%{$keyword}%' LIMIT {$offset}, {$pageSize}";
 $postLists = query($sql);
 
@@ -108,14 +108,9 @@ $lists = json_decode($json[0]['value'], true);
           </div>
           <div class="main">
             <p class="info"><?php echo $vals['nickname']?>  发表于 <?php echo $vals['created']?></p>
-            <p class="brief"><?php echo $vals['content']?></p>
+            <p class="brief"><?php echo $vals['slug']?></p>
             <p class="extra">
-              <span class="reading">阅读(3406)</span>
-              <span class="comment">评论(0)</span>
-              <a href="javascript:;" class="like">
-                <i class="fa fa-thumbs-up"></i>
-                <span>赞(167)</span>
-              </a>
+              <span class="reading">阅读(<?php echo $vals['views']?>)</span>
               <a href="javascript:;" class="tags">
                 分类：<span><?php echo $vals['name']?></span>
               </a>
