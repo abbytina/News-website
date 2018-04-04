@@ -74,6 +74,9 @@ function insert($table, $arr)
     // var_dump($sql);
     // exit;
     $result = mysqli_query($connect, $sql);
+    if (false === $result) {
+        var_dump(mysqli_error($connect));
+    }
     return $result; //返回添加后的结果
 }
 

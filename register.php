@@ -21,6 +21,7 @@ if (isPost()) {
                 'email' => $email,
                 'password' => $password,
                 'nickname' => $username,
+                'status' => 'unactivated'
             );
             if (!insert('users', $data)) {
                 $msg = '注册失败';
