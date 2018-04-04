@@ -114,11 +114,9 @@ $sites[2]['value'] = $postDetail['title'];
         <h3 class="com_title" id="comments">
         <strong>评论 <b> 0 </b></strong>
         </h3>
-        <div id="respond" class="no_webshot">
-          <div class="comment-signarea">
-          <textarea class="box-textarea" id="J_Textarea" placeholder="说两句吧..."></textarea>
-          <input type="submit" class="" value="评论">
-          </div>
+        <div id="respond" class="qq_webshot">
+          <textarea class="box_textarea" id="J_Textarea" placeholder="说两句吧..."></textarea>
+          <input type="submit" class="qq_cbtn " value="评论">
         </div>    
       </div>
       <!-- 评论列表 -->

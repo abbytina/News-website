@@ -1075,6 +1075,37 @@ img {
   font-size: 22px;
   padding: 10px 1px;
 }
+.content .qq_webshot{
+  width:100%;
+  position: relative;
+}
+.content .qq_webshot .box_textarea{
+  border: 2px solid #A4C8F1;
+  width: 97%;
+  height: 100px;
+  margin: 10px 6px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  color: #A4C8F1;
+}
+
+.qq_webshot .qq_cbtn{
+  width: 90px;
+  height: 32px;
+  line-height: 32px;
+  background: #dd3b3d;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  margin-top: 20px;
+  position: absolute;
+
+}
+.qq_signarea .box_textarea{
+  
+}
+
+
 
 
 .content .breadcrumb dt,

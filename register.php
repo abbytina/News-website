@@ -34,6 +34,7 @@ if (isPost()) {
 if (!empty($msg)) {
     echo '<html><head><meta charset="UTF-8"></head></html><script>alert("' . $msg . '");</script>';
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

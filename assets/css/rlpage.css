@@ -63,12 +63,12 @@ a:hover{
   display: block;
   width: 100%;
 }
-.btn-primary {
+.user_login .btn-primary {
   color: #ffffff;
   background-color: #40586d;
   border-color: #374b5d;
 }
-.btn {
+.user_login .btn {
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
@@ -140,9 +140,8 @@ a:hover{
   background-color: #40586d;
   border-color: #374b5d;
 }
-.btn {
+.b_register .reg-wrap .btn {
   display: inline-block;
-  margin-bottom: 0;
   font-weight: normal;
   text-align: center;
   vertical-align: middle;
@@ -150,10 +149,9 @@ a:hover{
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  padding: 13px 12px;
   font-size: 14px;
-  line-height: 1.42857143;
   border-radius: 4px;
+  padding: 10px 1px;
 }
 .b_register  .in_back{
   float: right;
