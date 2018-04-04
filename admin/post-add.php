@@ -126,7 +126,8 @@
         <div class="col-md-3">
           <div class="form-group">
             <label for="slug">别名</label>
-            <input id="slug" value="<?php echo isset($rows[0]['slug'])?$rows[0]['slug']:''?>" class="form-control" name="slug" type="text" placeholder="slug">
+            <input id="slug" value="<?php echo isset($rows[0]['slug'])?$rows[0]['slug']:''?>" class="form-control"
+                   name="slug" type="text" placeholder="slug" required>
             <p class="help-block">https://zce.me/post/<strong>slug</strong></p>
           </div>
           <div class="form-group">
@@ -150,7 +151,7 @@
           </div>
           <div class="form-group">
             <label for="created">发布时间</label>
-            <input id="created" value="<?php echo isset($rows[0]['created'])?$rows[0]['created']:''?>" class="form-control" name="created" type="datetime-local">
+            <input id="created" value="<?php echo isset($rows[0]['created'])?$rows[0]['created']:'' ?>" class="form-control" name="created" type="datetime-local" required>
           </div>
           <div class="form-group">
             <label for="status">状态</label>

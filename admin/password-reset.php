@@ -9,17 +9,19 @@
   // print_r($rows);
   // exit;
   $msg = '';
-  if(!empty($_POST)){
-    // print_r($_POST);
-    // exit;
-
-    $result = update('users',$_POST,$user_id);
-    if($result){
-      //刷新当前的页面
-      header('location:/admin/password-reset.php');
-    }else {
-      $msg = '数据更新失败...';
-    }
+  if(!empty($_POST) && $rows){
+      if ($rows[0]['password'] != $_POST['old']) {
+          $msg = '旧密码不正确';
+      } else {
+          $result = update('users', ['password' => $_POST['pwd']] ,$user_id);
+          if($result){
+              //刷新当前的页面
+              echo '<html><head><meta charset="utf-8"><script>alert("修改成功");location.href = "/admin/password-reset.php"</script></head></html>';
+              exit();
+          }else {
+              $msg = '数据更新失败...';
+          }
+      }
   }
 
   /**
@@ -46,20 +48,22 @@
         <h1>修改密码</h1>
       </div>
       <!-- 有错误信息时展示 -->
-      <!-- <div class="alert alert-danger">
-        <strong>错误！</strong>发生XXX错误
-      </div> -->
-      <form class="form-horizontal">
+        <?php
+        if (!empty($msg)){
+            echo '<div class="alert alert-danger"><strong>错误！</strong>' . $msg .'</div> ';
+        }
+      ?>
+      <form class="form-horizontal" id="rest-pass" method="post">
         <div class="form-group">
           <label for="old" class="col-sm-3 control-label">旧密码</label>
           <div class="col-sm-7">
-            <input id="old" class="form-control" type="password" placeholder="旧密码">
+            <input id="old" name="old" class="form-control" type="password" placeholder="旧密码">
           </div>
         </div>
         <div class="form-group">
           <label for="password" class="col-sm-3 control-label">新密码</label>
           <div class="col-sm-7">
-            <input id="password" class="form-control" type="password" placeholder="新密码">
+            <input id="password" name="pwd" class="form-control" type="password" placeholder="新密码">
           </div>
         </div>
         <div class="form-group">
@@ -76,7 +80,16 @@
       </form>
     </div>
   </div>
-
+  <script>
+      $('#rest-pass').on('submit', function () {
+          // todo 完善检验
+          var pwd = $('#password').val();
+          if (pwd ==='' || pwd !== $('#confirm').val()) {
+              alert('两次密码不一样！');
+              return false;
+          }
+      })
+  </script>
   <?php include './inc/aside.php'?>
 
 </body>

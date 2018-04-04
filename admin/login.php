@@ -34,7 +34,7 @@
        if(!empty($row)){
           //此处说明用户名是已经真实存在的了
          // 要去判断密码了
-        if($row['password'] == $password ){
+        if($row['password'] == $password && $row['status'] == 'activated'){
           // echo '用户名和密码正确，登陆成功。。。';
           // exit;
           session_start();//使用session之前一定要先启用session
