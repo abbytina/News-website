@@ -9,7 +9,7 @@ header('content-type:text/html;charset=utf-8');
    */
   require '../functions.php';
   checkLogin();
-  // error_reporting(0);
+  error_reporting(0);
     // 定义导航状态
   $active = 'comments';
 
@@ -66,9 +66,63 @@ header('content-type:text/html;charset=utf-8');
   // $lists = query('SELECT * FROM posts');
   // $lists = query('SELECT * FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id');
   // $com_lists = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,comments.status FROM comments LEFT JOIN posts on comments.post_id = posts.id LEFT JOIN posts on  posts.category_id = categories.id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
-  $com_lists = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,comments.status FROM comments limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
+  $com_lists = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,comments.status FROM comments  limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
   // print_r($com_lists);
   // exit;
+  
+      //post提交过来的数据
+      if(!empty($_POST)){ //接收post提交过来的数据      
+       if($action =='update'){
+           //
+           //更新数据   $_POST
+           // print_r($_POST);
+           // exit;
+         $comments_id = $_POST['id'];
+         
+         unset($_POST['id']);//删除掉这个id，因为更新的时候是不能更新id的，得根据id的条件去更新其它的字段值
+         // echo $str;
+         // exit;
+         // $sql = "update users set ". "aa=bb,cc=dd"
+        
+         $result = update('comments',$_POST,$comments_id);
+         // print_r($result);
+         // exit;
+         if($result ){
+           header('location:/admin/comments.php');
+         }else {
+           $msg = '更新数据失败...';
+         }
+        }else if($action=='deleteAll') {
+           $sql = "DELETE FROM comments where id in (".implode(',',$_POST['ids']).")";
+          $result = delete($sql);
+
+           header('Content-type:application/json');
+          if($result) {
+            //向前台发送一条删除 成功的信息
+            $arr = array('code'=>10000,'msg'=>'删除成功');
+            echo json_encode($arr);//转换成字符串输出到前台
+          }else {
+             $arr = array('code'=>10001,'msg'=>'删除失败...');
+            echo json_encode($arr);//转换成字符串输出到前台
+          }
+          exit;
+        }
+    }
+      
+    if($action=='delete'){
+      //删除  
+      // $connect = connect();
+      // $result = mysqli_query($connect,"DELETE FROM users where id = ".$id);
+      // print_r($result);
+      // exit;
+      $result= delete("DELETE FROM comments where id = ".$id);
+      if($result){
+        header('location:/admin/comments.php');//刷新页面
+      }else {
+        $msg = '删除数据失败...';
+      }
+    }
+ // }
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +145,7 @@ header('content-type:text/html;charset=utf-8');
       </div> -->
       <div class="page-action">
         <!-- show when multiple checked -->
-        <div class="btn-batch" style="display: none">
+        <div class="btn-batch deleteAll" style="display: none">
           <button class="btn btn-info btn-sm">批量批准</button>
           <button class="btn btn-warning btn-sm">批量拒绝</button>
           <button class="btn btn-danger btn-sm">批量删除</button>
@@ -126,12 +180,12 @@ header('content-type:text/html;charset=utf-8');
             <td class="text-center"><input type="checkbox"></td>
             <td><?php echo $vals['author']?></td>
             <td><?php echo $vals['content']?></td>
-            <td><?php echo $vals['content']?></td>
+            <td><?php echo $vals['title']?></td>
             <td><?php echo $vals['created']?></td>
             <td><?php echo $vals['status']?></td>
             <td class="text-center">
               <a href="javascript;" class="btn btn-info btn-xs">批准</a>
-              <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+              <a href="/admin/comments.php?action=delete&comments_id=<?php echo $val['id']?>" class="btn btn-danger btn-xs">删除</a>
             </td>
           </tr>
           <?php }?>
@@ -145,3 +199,59 @@ header('content-type:text/html;charset=utf-8');
   <?php include './inc/script.php'?>
 </body>
 </html>
+<script>
+   //1.当单击总的小方块的时候，让要下面的的小方块都选中
+   $('.toggleChk').on('click',function(){
+    // 在jquery的事件当中，this表示DOM对象
+      // if($(this).prop('checked')){
+
+      // }
+
+      if(this.checked){
+        $('.chk').prop('checked',true); // checked selected disabled
+        $('.deleteAll').show();
+      }else {
+        $('.chk').prop('checked',false);  
+        $('.deleteAll').hide();
+      }
+  })
+  //2.给小按钮注册事件，当一个或多个被选中的时候，也要让批量删除的按钮显示
+  $('.chk').on('click',function(){
+    var size = $('.chk:checked').size();
+    if(size>0){
+      $('.deleteAll').show();
+      return;
+      //1. 如果函数中有数据需要返回的话，得需要使用return关键字，将数据返回后，跳出当前函数，return关键字后面的代码不会执行
+      //2. 如果函数中没有数据要返回，但是也使用了return关键字,就表示直接跳出当前函数，return关键字后面的代码也不会执行
+      //3. 也就是说，在函数中只要使用了return关键字后，不管有没有返回数据，最终都会跳出当前的函数，return关键字后面的代码不会执行。
+    }
+
+     $('.deleteAll').hide();
+  })
+  //3.给批量删除按钮注册事件，批量的删除数据
+  $('.deleteAll').on('click',function(){
+      //1.获取所有被选中的小按钮的id,存到数组当中
+      var ids = [];
+      $('.chk:checked').each(function(){
+          ids.push($(this).val());
+      })
+
+     
+      //2.发送ajax请求到后台接口
+      $.ajax({
+        url:'/admin/comments.php?action=deleteAll', //虽然是post的提交，但是仍然可以在 url中拼接参数，只要是URL中的参数，都可以在后端通过$_GET的方式来获取
+        type:'post',
+        data:{ids:ids},
+        success:function(info){
+          // console.log(typeof info);
+          if(info.code == 10000){
+            location.reload(true);
+          }else {
+            alert('删除失败...');
+          }
+        }
+      })
+
+  })
+  
+</script>

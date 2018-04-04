@@ -42,24 +42,27 @@ if (!empty($msg)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>register</title>
+    <link rel="stylesheet" href="assets/css/rlpage.css">
+    <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.css">
 </head>
 <body>
-<div class="register">
-    <form class="qq_register" action="register.php" method="post">
-        <div class="register">
-            <input name="username" value="" type="text" autocomplete="off" placeholder="用户名" autofocus>
-        </div>
-        <div class="register">
-            <input name="email" value="" type="email" autocomplete="off" placeholder="邮箱">
-        </div>
-        <div class="register">
-            <input name="password" value="" type="password" autocomplete="off" placeholder="密码">
-        </div>
-        <input type="submit" class="reg_btn" value="注册">
-    </form>
-    <div>
-        <a href="index.php">返回首页</a>
+<div class="b_register">
+    <div class='reg_title'>
+        <h2>Sign Up</h2>
     </div>
+    <form class="reg-wrap" action="register.php" method="post">
+        <div class="form-group">
+            <input name="username" value="" type="text" class="form-control" autocomplete="off" placeholder="用户名" autofocus>
+        </div>
+        <div class="form-group">
+            <input name="email" value="" type="email" class="form-control" autocomplete="off" placeholder="邮箱">
+        </div>
+        <div class="form-group">
+            <input name="password" value="" type="password"  class="form-control" autocomplete="off" placeholder="密码">
+        </div>
+        <input type="submit" class="btn btn-primary btn-block" value="注册">
+        <a href="index.php" class="in_back" >返回首页&nbsp;<i class="fa fa-mail-reply"></i></a>
+    </form>
 </div>
 </body>
 </html>

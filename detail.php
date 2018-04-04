@@ -95,7 +95,7 @@ $sites[2]['value'] = $postDetail['title'];
           </div>
       </div>
         <!-- 登录前的评论 -->
-      <div class="comment">
+      <!-- <div class="qq_comment">
         <h3 class="title" id="comments">
         <div class="text-muted pull-right">
         </div>
@@ -108,23 +108,21 @@ $sites[2]['value'] = $postDetail['title'];
         <a class="btn btn-default" target="_blank" href="register.php">注册</a>
         </div>
         </div>
-      </div>
+      </div> -->
       <!-- 登录后的评论效果 -->
-      <div class="comment">
-        <h3 class="title" id="comments">
-        <div class="text-muted pull-right">
-        </div>
+      <div class="qq_comment">
+        <h3 class="com_title" id="comments">
         <strong>评论 <b> 0 </b></strong>
         </h3>
         <div id="respond" class="no_webshot">
-        <div class="comment-signarea">
-        <textarea class="box-textarea" id="J_Textarea" placeholder="说两句吧..."></textarea>
-        <input type="submit" class="" value="评论">
-        </div>
+          <div class="comment-signarea">
+          <textarea class="box-textarea" id="J_Textarea" placeholder="说两句吧..."></textarea>
+          <input type="submit" class="" value="评论">
+          </div>
         </div>    
       </div>
       <!-- 评论列表 -->
-      <div class="comment">
+      <div class="qq_comment">
         <strong>评论列表</strong>
         <?php foreach(get_post_comment($_GET['id']) as $item){ ?>
             <div>

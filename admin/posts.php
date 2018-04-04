@@ -70,6 +70,15 @@
 
   // print_r($lists);
   // exit;
+    // 删除
+  if($action=='delete') {
+    $result = delete('DELETE FROM posts WHERE id = '.$pid);
+    if($result){
+      header('location:/admin/posts.php');
+    }else {
+      $msg = '删除数据失败...';
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -153,7 +162,7 @@
             <?php }?>
             <td class="text-center">
               <a href="/admin/post-add.php?action=edit&pid=<?php echo $vals['id']?>" class="btn btn-default btn-xs">编辑</a>
-              <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+              <a href="/admin/posts.php?action=delete&pid=<?php echo $vals['id']?>" class="btn btn-danger btn-xs">删除</a>
             </td>
           </tr>
          <?php }?>

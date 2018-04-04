@@ -1061,12 +1061,22 @@ img {
   margin-bottom: 20px;
   background-color: #fff;
 }
-
-.content .comment {
+/* 评论部分 */
+.content .qq_comment {
   /* padding: 20px; */
   margin-bottom: 20px;
   background-color: #fff;
 }
+.content .com_title{
+  height: 30px;
+  border-bottom: 1px solid #AAA8A8;;
+  color: #61b3e5;
+  font-weight: 700;
+  font-size: 22px;
+  padding: 10px 1px;
+}
+
+
 .content .breadcrumb dt,
 .content .breadcrumb dd {
   display: inline-block;
