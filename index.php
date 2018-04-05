@@ -2,6 +2,7 @@
 header('content-type:text/html;charset=utf-8');
     // echo __DIR__; //获取当前的绝对路径
     require './functions.php';
+    // checkLogins(); // 判断用户是否登录
     // 热门排行序号
     $i = 1;
    $json = query("SELECT `value` FROM options WHERE `key` = 'nav_menus'");

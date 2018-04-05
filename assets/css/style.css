@@ -1119,13 +1119,14 @@ img {
   position: relative;
 }
 .content .qq_webshot .box_textarea{
-  border: 2px solid #A4C8F1;
+  border: 1px solid #A4C8F1;
   width: 97%;
   height: 100px;
   margin: 10px 6px;
   padding: 5px 5px;
   border-radius: 5px;
-  color: #A4C8F1;
+  outline:none;
+  resize:none;
 }
 
 .qq_webshot .qq_cbtn{
@@ -1140,6 +1141,12 @@ img {
   position: absolute;
   right: 12px;
   top: 135px;
+  border: 0 none;
+  outline:none;
+}
+.qq_webshot .qq_cbtn:hover{
+  background: #61b3e5;
+  opacity: .75;
 }
 .qq_comment .com_lists{
   padding: 2px 5px;

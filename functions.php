@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/config.php'; // D:\www\baixiu\config.php
+require __DIR__ . '/config.php'; // 定义数据库和连接数据库
 
 
 //0.0判断管理员是否登陆的函数
@@ -14,18 +14,17 @@ function checkLogin()
         exit;
     }
 }
-//0.1判断用户是否登陆的函数
-function checkLogins()
-{
-    session_start();
-    // print_r($_SESSION['user_info']);
-    if (!isset($_SESSION['user_info'])) {
-        //如果不存在，说明 还没有登陆，应该跳转到登陆页面
-        header('location:/admin/login.php');
-        exit;
-    }
-}
-
+// //0.1判断用户是否登陆的函数
+// function checkLogins()
+// {
+//     session_start();
+//     // print_r($_SESSION['user_info']);
+//     if (!isset($_SESSION['user_info'])) {
+//         //如果不存在，说明 还没有登陆，应该跳转到？？？
+//         header('location:/');
+//         exit;
+//     }
+// }
 
 //1.定义了一个连接数据库的函数
 function connect()

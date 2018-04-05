@@ -116,7 +116,7 @@ $sites[2]['value'] = $postDetail['title'];
         </h3>
         <div id="respond" class="qq_webshot">
           <textarea class="box_textarea" id="J_Textarea" placeholder="说两句吧..."></textarea>
-          <input type="submit" class="qq_cbtn " value="评论">
+          <input type="button" class="qq_cbtn " value="评论">
         </div>    
       </div>
       <!-- 评论列表 -->
@@ -162,3 +162,28 @@ $sites[2]['value'] = $postDetail['title'];
     </div>
   </div>
 
+<script src="./assets/vendors/jquery/jquery.min.js">  
+</script>
+<script>
+   $(".qq_cbtn").click(function() {
+  //获取Textarea的内容
+  var dataStr  = $("#J_Textarea").val();
+  // console.log(dataStr);
+    $.ajax({
+      type:"POST",
+      url:"/comment.php",
+      dataType:"json",
+      data:dataStr,
+      success:function(data){
+        // console.log(data);
+        // 判断状态
+        if(data.code == 0) {
+        alert(data.msg);
+        window.location.href= '/detail.php'; //js下的页面跳转
+      } else {
+        alert(data.msg);
+      }
+      }
+    });
+  });
+</script>
