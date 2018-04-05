@@ -1,4 +1,4 @@
-/* 登录 */
+/* 注册 */
 *{
   padding: 0;
   margin: 0;
@@ -13,39 +13,32 @@ a:hover{
   color:#1A6797;
   text-decoration: underline;
 }
-.user_login{
+.b_register{
   position: fixed;
   width: 100%;
   height: 100%;
-  background: url("/assets/img/rg.jpg") no-repeat;
+  background: url("/assets/img/banner.jpg") no-repeat;
   /* background-color: #eeeeee; */
 }
-
-.user_login .login-wrap {
+.b_register .reg_title {
+  position: absolute;
+  top: 35px;
+  left: 46%;
+  color: white;
+}
+.b_register .reg-wrap {
   position: relative;
   max-width: 380px;
-  margin: 150px auto;
-  padding: 100px 40px 40px;
+  margin: 130px  auto;
+  padding: 46px 40px 40px;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: #E4E3E3;
   opacity: 0.8;
 }
-.user_login .login-wrap .avatar {
-  position: absolute;
-  top: -86px;
-  left: 50%;
-  overflow: hidden;
-  width: 141px;
-  height: 130px;
-  margin-left: -70px;
-  border: 10px solid #fff;
-  border-radius: 50%;
-  box-shadow: 0 1px 5px #ccc;
-}
-.user_login .form-group {
+.b_register .form-group {
   margin-bottom: 15px;
 }
-.user_login .login-wrap .form-control{
+.b_register .reg-wrap .form-control{
   box-shadow: none;
   display: block;
   width: 93%;
@@ -63,29 +56,27 @@ a:hover{
   display: block;
   width: 100%;
 }
-.user_login .btn-primary {
+.btn-primary {
   color: #ffffff;
   background-color: #40586d;
   border-color: #374b5d;
 }
-.user_login .btn {
+.b_register .reg-wrap .re_btn {
+  width: 380px;
+  height: 41px;
   display: inline-block;
-  margin-bottom: 0;
   font-weight: normal;
   text-align: center;
   vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
   cursor: pointer;
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  padding: 13px 12px;
   font-size: 14px;
-  line-height: 1.42857143;
   border-radius: 4px;
+  padding: 10px 1px;
 }
-.user_login  .in_back{
+.b_register  .in_back{
   float: right;
   height: 20px;
   padding: 10px 2px;

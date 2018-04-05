@@ -640,11 +640,12 @@ img {
   color: #999;
   text-decoration: none;
 }
-
+/* 登陆注册 */
 .header .lg_slink {
   text-align: center;
   font-size: 14px;
   margin-top: 20px;
+  display: none;
 }
 .header .lg_slink a {
   color: #61b3e5;
@@ -654,6 +655,44 @@ img {
   color: #999;
   text-decoration:underline;
 }
+/* 登录后欢迎信息 */
+.header .ent_user{
+  width: 91%;
+  height: 58px;
+  /* background: #EBE6E6; */
+  padding: 21px 0px 22px 16px;
+}
+.header .ent_user .ent_img{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  overflow: hidden;
+  float: left;
+}
+.header .ent_user a {
+  color: #61b3e5;
+  text-decoration: none;
+}
+.header .ent_user .en_utxt{
+  line-height: 42px;
+  text-align: center;
+  text-overflow: ellipsis;    
+  overflow: hidden; 
+  white-space: nowrap; 
+}
+.header .ent_user .en_utxt p>a{
+  font-size: 14px;
+  font-weight: 600;
+}
+.header .ent_user .en_exit{
+  display: block;
+  padding-left: 72px;
+}
+.header .ent_user .en_exit:hover{
+  color: #999;
+  text-decoration: underline;
+}
+
 .content {
   padding: 20px;
   margin: 0 300px 0 190px;
@@ -1063,7 +1102,7 @@ img {
 }
 /* 评论部分 */
 .content .qq_comment {
-  /* padding: 20px; */
+  padding: 0 0 45px 0px;
   margin-bottom: 20px;
   background-color: #fff;
 }
@@ -1090,22 +1129,62 @@ img {
 }
 
 .qq_webshot .qq_cbtn{
-  width: 90px;
-  height: 32px;
-  line-height: 32px;
-  background: #dd3b3d;
-  color: #fff;
+  width: 109px;
+  height: 36px;
+  font-size: 16px;
+  /* line-height: 28px; */
+  background: #61b3e5;
+  color: #F8F9FA;
   text-align: center;
-  border-radius: 3px;
-  margin-top: 20px;
+  border-radius: 8px;
   position: absolute;
-
+  right: 12px;
+  top: 135px;
 }
-.qq_signarea .box_textarea{
-  
+.qq_comment .com_lists{
+  padding: 2px 5px;
 }
 
+.com_lists li{
+  height: 40px;
+  padding: 10px 0;
+}
 
+.com_lists li:hover{
+  background: #eee;;
+}
+
+.qq_comment .com_lists .com_img{
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  float: left;
+}
+.com_lists .com_img img{
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.com_lists .com_txt{
+  height: 40px;
+  line-height: 20px;
+  padding-left: 50px;
+  font-size: 12px;
+  color: #999;
+}
+.com_lists .com_txt p span{
+  color: #ca1d18;
+  font-size: 14px;
+  font-weight: 700;
+}
+.qq_comment .com_lists .com_img img{
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
 
 
 .content .breadcrumb dt,

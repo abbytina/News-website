@@ -1,43 +1,53 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: ivoth
- * Date: 2018/3/31
- * Time: 0:07
- */
-require_once 'functions.php';
-$res = array(
-  // 响应的状态码：0:登录成功  1：登录失败
-    'code' => 1,
-    'msg' => ''
-);
-if (!isset($_POST['email']) || empty($_POST['email'])) {
-    $res['msg'] = '邮箱不能为空';
-} else if (!isset($_POST['password']) || empty($_POST['password'])) {
-    $res['msg'] = '密码不能为空';
-} else {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $query = query("SELECT * FROM users WHERE email = '{$email}' AND `password` = '{$password}'");
-    if (empty($query)) {
-        $res['msg'] = '邮箱或密码不正确';
-    } else {
-        $res['code'] = 0;
-        $res['msg'] = '登录成功';
-
-        // session_start();//使用session之前一定要先启用session
-        // $_SESSION['user_info'] = $query; //把用户的登陆信息存到session当中,随响应头发送给浏览器，存到浏览器的cookie当中
-        // header('location:/admin');  //php中页面跳转
-
-        session_start(array('cookie_lifetime' =>86400));
-        $_SESSION['userInfo'] = $query[0];
-        // header('location:/index');  //php中页面跳转
-        // exit;
-        echo "<script>window.location.href='/index.php'</script>";
-    }
-}
-
-header('Content-type: application/json');
-// echo json_encode_no_zh($res);
-?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>login</title>
+  <link rel="stylesheet" href="assets/css/rlpage.css">
+  <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.css">
+</head>
+<body>
+  <div class="user_login">
+    <form class="login-wrap" action="/login.php" id="form">
+    <img class="avatar" src="./assets/img/girl.jpg">
+      <div class="form-group">
+        <input name="email" value="" type="email"  class="form-control" placeholder="邮箱" autofocus >
+      </div>
+      <div class="form-group">  
+        <input name="password" value="" type="password"  class="form-control" autocomplete="new-password"  placeholder="密码" >
+      </div>
+      <input type="button" id="lg_btn" class="btn btn-primary btn-block" value="登录">
+      <a href="index.php" class="in_back" >返回首页&nbsp;<i class="fa fa-mail-reply"></i></a>
+    </form>
+    <div>  
+    </div>
+  </div>
+</body>
+</html>
+<script src="./assets/vendors/jquery/jquery.min.js">
+  
+</script>
+<script>
+  $("#lg_btn").click(function() {
+  //如果要将表单中的所有数据进行键值对的处理
+  var dataStr  = $("#form").serialize();
+    $.ajax({
+      type:"POST",
+      url:"/api/logins.php",
+      dataType:"json",
+      data:dataStr,
+      success:function(data){
+        // console.log(data);
+        // 判断状态
+        if(data.code == 0) {
+        alert(data.msg);
+        window.location.href= '/index.php'; //js下的页面跳转
+      } else {
+        alert(data.msg);
+      }
+      }
+    });
+  });
+  </script>

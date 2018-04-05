@@ -112,7 +112,7 @@ $sites[2]['value'] = $postDetail['title'];
       <!-- 登录后的评论效果 -->
       <div class="qq_comment">
         <h3 class="com_title" id="comments">
-        <strong>评论 <b> 0 </b></strong>
+        <strong>评论</strong>
         </h3>
         <div id="respond" class="qq_webshot">
           <textarea class="box_textarea" id="J_Textarea" placeholder="说两句吧..."></textarea>
@@ -121,13 +121,26 @@ $sites[2]['value'] = $postDetail['title'];
       </div>
       <!-- 评论列表 -->
       <div class="qq_comment">
+        <h3 class="com_title" id="comments">
         <strong>评论列表</strong>
-        <?php foreach(get_post_comment($_GET['id']) as $item){ ?>
-            <div>
-              <p><?php echo $item['author']?>说：</p>
-              <p><?php echo $item['content']?></p>
-            </div>    
-       <?php }?>
+        </h3> 
+       <?php foreach(get_post_comment($_GET['id']) as $item){ ?>
+          <ul class="body com_lists">
+          <li>
+            <a href="javascript:;">
+              <div class="com_img">
+                <img src="/assets/img/default.png" alt="">
+              </div>
+              <div class="com_txt">
+                <p>
+                  <span><?php echo $item['author']?></span>&nbsp;&nbsp;说:
+                </p>
+                <p><?php echo $item['content']?></p>
+              </div>
+            </a>
+          </li>
+          </ul>
+        <?php }?>
       </div>
         <!-- 热门推荐 -->
       <div class="panel hots">

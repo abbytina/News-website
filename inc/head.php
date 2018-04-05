@@ -36,6 +36,17 @@
         <a href="javascript:;">微博&nbsp;<i class="fa fa-weibo"></i></a> | <a href="javascript:;">公众号&nbsp;<i class="fa fa-wechat"></i></a>
       </div>
       <div class="lg_slink">
-        <a href="/logins.php">登录&nbsp;<i class="fa fa-sign-in"></i></a> | <a href="/register.php">注册&nbsp;<i class="fa fa-envelope-square"></i></a>
+        <a href="/login.php">登录&nbsp;<i class="fa fa-sign-in"></i></a> | <a href="/register.php">注册&nbsp;<i class="fa fa-envelope-square"></i></a>
+      </div>
+      <div class="ent_user">
+          <div class="ent_img">
+            <img src="../assets/img/default.png" alt="">
+          </div>
+          <div class="en_utxt">
+                <p>
+                  <span>欢迎您，</span><a href="javascript:;"><?php echo '用户'?> </a>
+                </p>
+          </div>
+          <a href="" class="en_exit">[退出]</a>
       </div>
     </div>

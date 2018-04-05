@@ -13,7 +13,8 @@
       if ($rows[0]['password'] != $_POST['old']) {
           $msg = '旧密码不正确';
       } else {
-          $result = update('users', ['password' => $_POST['pwd']] ,$user_id);
+          $result = update('users',  array('password' => $_POST['pwd'] ) ,$user_id);
+          // $result = update('users', ['password' => $_POST['pwd']] ,$user_id); // []版本语法兼容问题
           if($result){
               //刷新当前的页面
               echo '<html><head><meta charset="utf-8"><script>alert("修改成功");location.href = "/admin/password-reset.php"</script></head></html>';

@@ -3,7 +3,7 @@
 require __DIR__ . '/config.php'; // D:\www\baixiu\config.php
 
 
-//0.判断用户是否登陆的函数
+//0.0判断管理员是否登陆的函数
 function checkLogin()
 {
     session_start();
@@ -14,6 +14,18 @@ function checkLogin()
         exit;
     }
 }
+//0.1判断用户是否登陆的函数
+function checkLogins()
+{
+    session_start();
+    // print_r($_SESSION['user_info']);
+    if (!isset($_SESSION['user_info'])) {
+        //如果不存在，说明 还没有登陆，应该跳转到登陆页面
+        header('location:/admin/login.php');
+        exit;
+    }
+}
+
 
 //1.定义了一个连接数据库的函数
 function connect()
@@ -122,7 +134,7 @@ function json_encode_no_zh($arr)
 
     return preg_replace($search, $replace, $str);
 }
-
+// 8.判断是不是post提交
 function isPost()
 {
     return isset($_SERVER['REQUEST_METHOD']) && !strcasecmp($_SERVER['REQUEST_METHOD'], 'POST');
