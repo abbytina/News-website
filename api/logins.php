@@ -33,7 +33,7 @@ if (!isset($_POST['email']) || empty($_POST['email'])) {
         // header('location:/admin');  //php中页面跳转
 
         session_start(array('cookie_lifetime' =>86400));
-        $_SESSION['userInfo'] = $query[0];
+        $_SESSION['user_info'] = $query[0];
         //  echo "<script>window.location.href='/index.php'</script>";
         // header('location:/index');  //php中页面跳转
         // exit;
@@ -41,6 +41,6 @@ if (!isset($_POST['email']) || empty($_POST['email'])) {
     }
 }
 header('Content-type: application/json');
-echo json_encode_no_zh($res);
-?>
+echo json_encode($res, JSON_UNESCAPED_UNICODE);
+
 

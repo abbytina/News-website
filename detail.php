@@ -170,26 +170,36 @@ $sites[2]['value'] = $postDetail['title'];
 <script src="./assets/vendors/jquery/jquery.min.js">  
 </script>
 <script>
-  // 点击评论按钮的提交请求
-   $(".qq_cbtn").click(function() {
-  //获取Textarea的内容
-  var dataStr  = $("#J_Textarea").val();
-  // console.log(dataStr);
-    $.ajax({
-      type:"POST",
-      url:"/comment.php",
-      dataType:"json",
-      data:dataStr,
-      success:function(data){
-        // console.log(data);
-        // 判断状态
-        if(data.code == 0) {
-        alert(data.msg);
-        window.location.href= '/detail.php'; //js下的页面跳转
-      } else {
-        alert(data.msg);
-      }
-      }
-    });
-  });
+  $(function() {
+      var postId = '<?php echo $postDetail["id"]; ?>';
+
+      $.get('/comment.php?action=index', {postId: postId}, function (res) {
+          // TODO 小姐姐这是你的了 foreach。。。
+          console.log(res);
+
+      });
+
+      // 点击评论按钮的提交请求
+      $(".qq_cbtn").click(function() {
+          //获取Textarea的内容
+          var dataStr  = $("#J_Textarea").val();
+          // console.log(dataStr);
+          $.ajax({
+              type:"POST",
+              url:"/comment.php?action=add",
+              dataType:"json",
+              data:{postId: postId, content: dataStr},
+              success:function(data){
+                  // console.log(data);
+                  // 判断状态
+                  if(data.code === 0) {
+                      alert(data.msg);
+                      window.location.reload();
+                  } else {
+                      alert(data.msg);
+                  }
+              }
+          });
+      });
+  })
 </script>

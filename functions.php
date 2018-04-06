@@ -122,6 +122,9 @@ function update($table, $arr, $id)
 //7.将数组转换成 json字符串的时候，保证汉字不被unicode编码转化
 function json_encode_no_zh($arr)
 {
+    if (version_compare(PHP_VERSION, '5.4.0', '>')) {
+        return json_encode($arr, JSON_UNESCAPED_UNICODE);
+    }
     $str = str_replace("\\/", "/", json_encode($arr));
     $search = "#\\\u([0-9a-f]+)#ie";
 

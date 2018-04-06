@@ -35,7 +35,9 @@
       <div class="slink">
         <a href="javascript:;">微博&nbsp;<i class="fa fa-weibo"></i></a> | <a href="javascript:;">公众号&nbsp;<i class="fa fa-wechat"></i></a>
       </div>
-      <?php if(!empty($_SESSION['user_info'])) { ?>
+      <?php
+      session_start();
+      if(!empty($_SESSION['user_info'])) { ?>
           <!-- 登录后状态 -->
       <div class="ent_user">
           <div class="ent_img">

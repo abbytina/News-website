@@ -32,7 +32,7 @@ class Utils
      */
     public static function session($name, $value = null)
     {
-        session_start();
+        if (!session_id()) session_start();
         if (is_array($name)) {
             foreach ($name as $i => $item) {
                 $_SESSION[$i] = $item;
