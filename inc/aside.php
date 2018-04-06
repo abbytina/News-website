@@ -42,7 +42,12 @@ $pl_contents = query("SELECT comments.id,comments.author,comments.email,comments
           <li>
             <a href="javascript:;">
               <div class="avatar">
-                <img src="/assets/img/default.png" alt="">
+                   <!-- 判断头像 没有则给默认头像 -->
+                <?php if(empty($_SESSION['user_info']['avatar'])) { ?>
+                    <img class="avatar" src="/assets/img//animal.jpg">
+                    <?php } else { ?>
+                    <img class="avatar" src="<?php echo $_SESSION['user_info']['avatar']; ?>">
+                <?php } ?>
               </div>
               <div class="txt">
                 <p>

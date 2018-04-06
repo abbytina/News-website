@@ -109,7 +109,7 @@ $sites[2]['value'] = $postDetail['title'];
         </div>
         </div>
       </div> -->
-      <!-- 登录后的评论效果 -->
+      <!-- 评论区 -->
       <div class="qq_comment">
         <h3 class="com_title" id="comments">
         <strong>评论</strong>
@@ -129,7 +129,12 @@ $sites[2]['value'] = $postDetail['title'];
           <li>
             <a href="javascript:;">
               <div class="com_img">
-                <img src="/assets/img/default.png" alt="">
+                        <!-- 判断头像 没有则给默认头像 -->
+                <?php if(empty($_SESSION['user_info']['avatar'])) { ?>
+                    <img class="avatar" src="/assets/img//animal.jpg">
+                    <?php } else { ?>
+                    <img class="avatar" src="<?php echo $_SESSION['user_info']['avatar']; ?>">
+                <?php } ?>
               </div>
               <div class="com_txt">
                 <p>
@@ -165,6 +170,7 @@ $sites[2]['value'] = $postDetail['title'];
 <script src="./assets/vendors/jquery/jquery.min.js">  
 </script>
 <script>
+  // 点击评论按钮的提交请求
    $(".qq_cbtn").click(function() {
   //获取Textarea的内容
   var dataStr  = $("#J_Textarea").val();

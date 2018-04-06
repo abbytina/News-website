@@ -1,6 +1,7 @@
 <?php
 require './functions.php';
 header('content-type:text/html;charset=utf-8');
+
 error_reporting(0);
 $json = query("SELECT `value` FROM options WHERE `key` = 'nav_menus'");
 // print_r($lists);

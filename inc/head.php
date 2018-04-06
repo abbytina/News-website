@@ -35,23 +35,30 @@
       <div class="slink">
         <a href="javascript:;">微博&nbsp;<i class="fa fa-weibo"></i></a> | <a href="javascript:;">公众号&nbsp;<i class="fa fa-wechat"></i></a>
       </div>
+      <?php if(!empty($_SESSION['user_info'])) { ?>
           <!-- 登录后状态 -->
       <div class="ent_user">
           <div class="ent_img">
-            <img src="../assets/img/default.png" alt="">
+          <!-- 判断头像 没有则给默认头像 -->
+          <?php if(empty($_SESSION['user_info']['avatar'])) { ?>
+              <img class="avatar" src="/assets/img//animal.jpg">
+              <?php } else { ?>
+              <img class="avatar" src="<?php echo $_SESSION['user_info']['avatar']; ?>">
+          <?php } ?>
           </div>
           <div class="en_utxt">
                 <p>
-                  <span>欢迎您，</span><a href="javascript:;"><?php echo 'SS'?> </a>
+                  <span>欢迎您，</span><a href="javascript:;"><?php echo  $_SESSION['user_info']['nickname'];?> </a>
                 </p>
           </div>
           <a href="/logouts.php" class="en_exit">[退出]</a>
       </div>
+      <?php } else { ?>
           <!-- 登录前 -->
       <div class="lg_slink">
         <a href="/login.php">登录&nbsp;<i class="fa fa-sign-in"></i></a> | <a href="/register.php">注册&nbsp;<i class="fa fa-envelope-square"></i></a>
       </div>
-
+      <?php } ?>
     </div>
   </body>
 </html>

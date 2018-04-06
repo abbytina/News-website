@@ -52,8 +52,6 @@ class Comment
     {
 
     }
-
-
 }
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
