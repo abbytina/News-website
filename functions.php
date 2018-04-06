@@ -6,7 +6,8 @@ require __DIR__ . '/config.php'; // 定义数据库和连接数据库
 //0.0判断管理员是否登陆的函数
 function checkLogin()
 {
-    session_start();
+    // session_start();
+    if (!session_id()) session_start();
     // print_r($_SESSION['user_info']);
     if (!isset($_SESSION['user_info'])) {
         //如果不存在，说明 还没有登陆，应该跳转到登陆页面

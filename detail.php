@@ -131,7 +131,7 @@ $sites[2]['value'] = $postDetail['title'];
               <div class="com_img">
                         <!-- 判断头像 没有则给默认头像 -->
                 <?php if(empty($_SESSION['user_info']['avatar'])) { ?>
-                    <img class="avatar" src="/assets/img//animal.jpg">
+                    <img class="avatar" src="/assets/img/animal.jpg">
                     <?php } else { ?>
                     <img class="avatar" src="<?php echo $_SESSION['user_info']['avatar']; ?>">
                 <?php } ?>
@@ -172,10 +172,11 @@ $sites[2]['value'] = $postDetail['title'];
 <script>
   $(function() {
       var postId = '<?php echo $postDetail["id"]; ?>';
-
+      
       $.get('/comment.php?action=index', {postId: postId}, function (res) {
           // TODO 小姐姐这是你的了 foreach。。。
           console.log(res);
+
 
       });
 
@@ -190,7 +191,7 @@ $sites[2]['value'] = $postDetail['title'];
               dataType:"json",
               data:{postId: postId, content: dataStr},
               success:function(data){
-                  // console.log(data);
+                  console.log(data);
                   // 判断状态
                   if(data.code === 0) {
                       alert(data.msg);

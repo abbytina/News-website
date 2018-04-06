@@ -36,7 +36,8 @@
         <a href="javascript:;">微博&nbsp;<i class="fa fa-weibo"></i></a> | <a href="javascript:;">公众号&nbsp;<i class="fa fa-wechat"></i></a>
       </div>
       <?php
-      session_start();
+      // session_start();
+      if (!session_id()) session_start();
       if(!empty($_SESSION['user_info'])) { ?>
           <!-- 登录后状态 -->
       <div class="ent_user">

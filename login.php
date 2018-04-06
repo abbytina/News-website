@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="user_login">
-    <form class="login-wrap" action="/login.php" id="form">
+    <form class="login-wrap" action="/api/logins.php" id="form" method="post">
     <img class="avatar" src="./assets/img/girl.jpg">
       <div class="form-group">
         <input name="email" value="" type="email"  class="form-control" placeholder="邮箱" autofocus >
@@ -39,7 +39,7 @@
       dataType:"json",
       data:dataStr,
       success:function(data){
-        // console.log(data);
+        console.log(data);
         // 判断状态
         if(data.code == 0) {
         alert(data.msg);

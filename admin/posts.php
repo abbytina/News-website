@@ -6,7 +6,7 @@
    * 3.当数据量很大的时候，要实现一个分布的处理
    * 4.当单击编辑按钮的时候，要跳转到post-add.php页面
    */
-    
+   error_reporting(0);
   require '../functions.php';
   checkLogin();
    // 定义二级导航

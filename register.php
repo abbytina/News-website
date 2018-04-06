@@ -26,7 +26,7 @@ if (isPost()) {
             if (!insert('users', $data)) {
                 $msg = '注册失败';
             } else {
-                echo '<html><head><meta charset="UTF-8"></head></html><script>alert("注册成功");location.href = "/index.php"</script>';
+                echo '<html><head><meta charset="UTF-8"></head></html><script>alert("注册成功！可直接登录");location.href = "/login.php"</script>';
                 exit();
             }
         }
