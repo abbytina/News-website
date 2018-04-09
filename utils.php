@@ -59,6 +59,6 @@ class Utils
         if (self::isLogin()) {
             exit(self::formatApi(401, '未登录'));
         }
-        return self::session('userInfo');
+        return self::session('user_info');
     }
 }
