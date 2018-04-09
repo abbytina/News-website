@@ -40,7 +40,7 @@ class Utils
             return;
         }
         if (empty($value)) {
-            return $_SESSION[$name];
+            return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
         }
         $_SESSION[$name] = $value;
     }
@@ -50,7 +50,7 @@ class Utils
      */
     public static function isLogin()
     {
-        $session = self::session('userInfo');
+        $session = self::session('user_info');
         return empty($session);
     }
 
