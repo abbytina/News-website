@@ -14,7 +14,7 @@
    // 定义导航状态
    $active = 'posts';
 
-  // $total = 106;// 当前数据库里面有106条数据
+  // $total = 106;// 当前数据库里面有X条数据
     $total = query('SELECT count(*) AS total FROM posts');
     // print_r($total);
     // exit;
@@ -73,6 +73,7 @@
     // 删除
   if($action=='delete') {
     $result = delete('DELETE FROM posts WHERE id = '.$pid);
+    $result =  update('posts',$pid); //更新数组库里面的那一项数据
     if($result){
       header('location:/admin/posts.php');
     }else {

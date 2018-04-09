@@ -94,7 +94,7 @@ $sites[2]['value'] = $postDetail['title'];
               <?php echo $postDetail['content']?>
           </div>
       </div>
-        <!-- 登录前的评论 -->
+        <!-- 登录前的评论 -->                                         
       <!-- <div class="qq_comment">
         <h3 class="title" id="comments">
         <div class="text-muted pull-right">
@@ -184,16 +184,16 @@ $sites[2]['value'] = $postDetail['title'];
       $(".qq_cbtn").click(function() {
           //获取Textarea的内容
           var dataStr  = $("#J_Textarea").val();
-          // console.log(dataStr);
+          console.log(dataStr);
           $.ajax({
               type:"POST",
               url:"/comment.php?action=add",
               dataType:"json",
               data:{postId: postId, content: dataStr},
               success:function(data){
-                  console.log(data);
+                  // console.log(data);
                   // 判断状态
-                  if(data.code === 0) {
+                  if(data.code == 0) {
                       alert(data.msg);
                       window.location.reload();
                   } else {

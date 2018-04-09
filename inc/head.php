@@ -13,17 +13,17 @@
 <body>
   <div class="wrapper">
     <div class="topnav">
-      <ul>
+      <!-- <ul class="ul_topnav">
         <?php foreach($lists as $key => $vals){?>
-          <li><a href="<?php echo $vals['link']?>"><i class="<?php echo $vals['icon']?>"></i><?php echo $vals['title']?></a></li>
+          <li class="li_topnav"><a href="<?php echo $vals['link']?>"><i class="<?php echo $vals['icon']?>"></i><?php echo $vals['title']?></a></li>
         <?php }?>
-      </ul>
+      </ul> -->
     </div>
     <div class="header">
       <h1 class="logo"><a href="index.php"><img src="assets/img/logo.png" alt=""></a></h1>
       <ul class="nav">
         <?php foreach($lists as $key => $vals){?>
-          <li><a href="<?php echo $vals['link']?>"><i class="<?php echo $vals['icon']?>"></i><?php echo $vals['title']?></a></li>
+          <li class="li_nav"><a href="<?php echo $vals['link']?>"><i class="<?php echo $vals['icon']?>"></i><?php echo $vals['title']?></a></li>
         <?php }?>
       </ul>
       <div class="search">
@@ -65,3 +65,41 @@
     </div>
   </body>
 </html>
+<script src="../assets/vendors/jquery/jquery.min.js">
+  
+</script>
+<script>
+  // 1. js 的方式
+  // var ulnav = document.getElementsByClassName("nav");
+  // var lis = ulnav[0].getElementsByTagName("li");
+  // console.log(lis);
+  // for(var i=0;i<lis.length;i++){
+  //           lis[i].setAttribute("index",i);
+  //           lis[i].onclick=function(){
+  //               for(var i=0;i<lis.length;i++){
+  //                   if(this.getAttribute("index")==i){
+  //                       // lis[i].style.color="#fff";
+  //                       lis[i].style.backgroundColor="#666";
+  //                   }else{
+  //                       // lis[i].style.color="";
+  //                       lis[i].style.backgroundColor="";
+  //                   }
+  //               }
+  //           }
+  //       }
+
+  // 2.  jq的方式
+  $(document).ready(function(){
+        var navList=document.getElementsByClassName("li_nav");
+        // console.log(navList);
+        for(let i=0;i<navList.length;i++){
+            navList[i].onclick = function(){
+                this.style.backgroundColor = "gray";
+                for (var i = 0; i < $(this).siblings().length; i++) {
+                    $(this).siblings().css("background","");
+                }
+            }  
+
+        }
+    });
+</script>

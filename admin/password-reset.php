@@ -17,7 +17,7 @@
           // $result = update('users', ['password' => $_POST['pwd']] ,$user_id); // []版本语法兼容问题
           if($result){
               //刷新当前的页面
-              echo '<html><head><meta charset="utf-8"><script>alert("修改成功");location.href = "/admin/password-reset.php"</script></head></html>';
+              echo '<html><head><meta charset="utf-8"><script>alert("修改成功");location.href = "/admin/profile.php"</script></head></html>';
               exit();
           }else {
               $msg = '数据更新失败...';
@@ -85,9 +85,12 @@
       $('#rest-pass').on('submit', function () {
           // todo 完善检验
           var pwd = $('#password').val();
-          if (pwd ==='' || pwd !== $('#confirm').val()) {
+          if (pwd =='' || pwd != $('#confirm').val()) {
               alert('两次密码不一样！');
               return false;
+          }else if(pwd == $('#old').val()){
+            alert('新密码不能与旧密码重复！');
+            return false;
           }
       })
   </script>

@@ -655,6 +655,9 @@ img {
   color: #999;
   text-decoration:underline;
 }
+.add{
+  color: #2F545F;
+}
 /* 登录后欢迎信息 */
 .header .ent_user{
   width: 91%;
@@ -1100,6 +1103,14 @@ img {
   margin-bottom: 20px;
   background-color: #fff;
 }
+.content .article div p img{
+  display: block;
+  text-align:center;
+  max-width: 50%;
+  max-height: 50%;
+  margin:0 auto
+}
+
 /* 评论部分 */
 .content .qq_comment {
   padding: 0 0 45px 0px;
