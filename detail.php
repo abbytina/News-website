@@ -88,27 +88,12 @@ $sites[2]['value'] = $postDetail['title'];
           <span><?php echo $postDetail['nickname']?>发布于 <?php echo $postDetail['created']?></span>
           <span>分类: <a href="javascript:;"><?php echo $postDetail['c_name']?></a></span>
           <span>阅读: (<?php echo $postDetail['views']?>)</span>
-          <span>评论: (<?php echo $postDetail['comments']?>)</span>
+          <!-- <span>评论: (<?php echo $postDetail['comments']?>)</span> -->
         </div>
           <div>
               <?php echo $postDetail['content']?>
           </div>
       </div>
-        <!-- 登录前的评论 -->                                         
-      <!-- <div class="qq_comment">
-        <h3 class="title" id="comments">
-        <div class="text-muted pull-right">
-        </div>
-        <strong>评论 <b> 0 </b></strong>
-        </h3>
-        <div id="respond" class="no_webshot">
-        <div class="comment-signarea">
-        <h3 class="text-muted">评论前必须登录！</h3>
-        <a class="btn btn-default" target="_blank" href="login.php">登陆</a>
-        <a class="btn btn-default" target="_blank" href="register.php">注册</a>
-        </div>
-        </div>
-      </div> -->
       <!-- 评论区 -->
       <div class="qq_comment">
         <h3 class="com_title" id="comments">
@@ -138,7 +123,7 @@ $sites[2]['value'] = $postDetail['title'];
               </div>
               <div class="com_txt">
                 <p>
-                  <span><?php echo $item['author']?></span>&nbsp;&nbsp;说:
+                  <span><?php echo $item['author']?></span>&nbsp;&nbsp; 在&nbsp;&nbsp;<span><?php echo $item['created']?></span>&nbsp;&nbsp;说:
                 </p>
                 <p><?php echo $item['content']?></p>
               </div>
@@ -174,10 +159,7 @@ $sites[2]['value'] = $postDetail['title'];
       var postId = '<?php echo $postDetail["id"]; ?>';
       
       $.get('/comment.php?action=index', {postId: postId}, function (res) {
-          // TODO 小姐姐这是你的了 foreach。。。
-          console.log(res);
-
-
+          // console.log(res);
       });
 
       // 点击评论按钮的提交请求

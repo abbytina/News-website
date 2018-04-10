@@ -13,22 +13,20 @@ header('content-type:text/html;charset=utf-8');
     // 定义导航状态
   $active = 'comments';
 
-  // $total = 106;// 当前数据库里面有106条数据
+  // 当前数据库里面有106条数据
     $total = query('SELECT count(*) AS total FROM comments');
-    // print_r($total);
-    // exit;
+
     $total = $total[0]['total'];
 
     //每页显示7条数据
-    $pageSize = 9;
+    $pageSize = 3;
 
     //计算出总的页数
     $pageCount = ceil($total / $pageSize) ;
 
     //获取当前页的编码
     $pageCurrent = isset($_GET['page'])?$_GET['page']:'1';
-    // print_r($pageCount);
-    // exit;
+
     //设置上一页
     $prevPage = $pageCurrent - 1;
 
@@ -39,36 +37,39 @@ header('content-type:text/html;charset=utf-8');
     $nextPage = $nextPage > $pageCount ? $pageCount:$nextPage;
 
     //设置当前显示的每页的编码个数
-
     $pageLimit = 7;  //1 2 3 4 5 6 7     5 6 7  8 9 10 11    19  20  21 22 23 24 25
 
     //1 2 3 4 5 6 7 8 9           limit 0, 9,   (当前页-1)*$pageSize
     //10 11 12 13 14 15 16 17 18        9, 9
     //19 20 21 22 23 24 25 26 27        18,9 
 
+ //根据当前页码计算页码的起点
     $start = $pageCurrent - floor($pageLimit / 2);
-    $start = $start < 1? 1 :$start;
-
+ //判断起点的边界不能小于1
+    if($start < 1) {
+      $start = 1;
+  }
+  //根据页码的起点计算终点（长度是固定的）
     $end = $start + $pageLimit - 1 ;
-
-    // $end = $end > $pageCount ?$pageCount :$end;
     if($end > $pageCount ){
       $end = $pageCount;
       $start = $end - $pageLimit + 1; // 开始页面要重新计算
+       // 同样需要判断起点边界不能小于1
+       if($start < 1) {
+        $start = 1;
+        }
     }
-    // $pages =range(1,10);
-    // $pages =range(1,$pageCount);
+
     $pages =range($start,$end);
-
-
-    //设置当前页面中显示数据的起始编号
+//     //设置当前页面中显示数据的起始编号
     $offset  = ($pageCurrent -1) * $pageSize;
-  // $lists = query('SELECT * FROM posts');
-  // $lists = query('SELECT * FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id');
-  // $com_lists = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,comments.status FROM comments LEFT JOIN posts on comments.post_id = posts.id LEFT JOIN posts on  posts.category_id = categories.id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
-  $com_lists = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,comments.status FROM comments  limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
-  // print_r($com_lists);
-  // exit;
+
+  // $lists = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.status,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
+  $com_lists = query("SELECT comments.id,comments.author,comments.post_id,comments.email,
+  comments.created,comments.content,comments.status,posts.title FROM comments 
+  LEFT JOIN posts on comments.post_id = posts.id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
+  //  print_r($com_lists);
+  //  exit;
   
       //post提交过来的数据
       if(!empty($_POST)){ //接收post提交过来的数据      
@@ -151,15 +152,23 @@ header('content-type:text/html;charset=utf-8');
           <button class="btn btn-danger btn-sm">批量删除</button>
         </div>
         <ul class="pagination pagination-sm pull-right">
-          <li><a href="/admin/comments.php?page=<?php echo $prevPage?>">上一页</a></li>
+          <li>
+            <a href="/admin/comments.php?page=<?php echo $prevPage?>">上一页</a>
+          </li>
           <?php foreach($pages as $key => $val){?>
             <?php if($pageCurrent == $val){ ?>
-            <li class="active"><a href="/admin/comments.php?page=<?php echo $val?>"><?php echo $val?></a></li>
+            <li class="active">
+              <a href="/admin/comments.php?page=<?php echo $val?>"><?php echo $val?></a>
+            </li>
             <?php }else { ?>
-            <li><a href="/admin/comments.php?page=<?php echo $val?>"><?php echo $val?></a></li>
+            <li>
+              <a href="/admin/comments.php?page=<?php echo $val?>"><?php echo $val?></a>
+            </li>
             <?php }?>
         <?php }?>
-          <li><a href="/admin/comments.php?page=<?php echo $nextPage?>">下一页</a></li>
+          <li>
+            <a href="/admin/comments.php?page=<?php echo $nextPage?>">下一页</a>
+          </li> 
         </ul>
       </div>
       <table class="table table-striped table-bordered table-hover">
@@ -182,7 +191,15 @@ header('content-type:text/html;charset=utf-8');
             <td><?php echo $vals['content']?></td>
             <td><?php echo $vals['title']?></td>
             <td><?php echo $vals['created']?></td>
-            <td><?php echo $vals['status']?></td>
+            <?php if($vals['status']=='approved'){ ?>
+                  <td>批准</td>
+                  <?php }else if($vals['status']=='rejected'){ ?>
+                  <td>驳回</td>
+                  <?php }else if($vals['status']=='held'){ ?>
+                  <td>展示</td>
+                  <?php }else {?>
+                  <td>垃圾</td>
+                  <?php }?>
             <td class="text-center">
               <a href="javascript;" class="btn btn-info btn-xs">批准</a>
               <a href="/admin/comments.php?action=delete&comments_id=<?php echo $val['id']?>" class="btn btn-danger btn-xs">删除</a>

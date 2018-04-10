@@ -57,7 +57,7 @@ class Utils
     public static function getUserInfo()
     {
         if (self::isLogin()) {
-            exit(self::formatApi(401, '未登录'));
+            exit(self::formatApi(401, '您还未登录，不能参与评论！'));
         }
         return self::session('user_info');
     }

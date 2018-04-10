@@ -21,7 +21,7 @@
     $total = $total[0]['total'];
 
     //每页显示7条数据
-    $pageSize = 9;
+    $pageSize = 8;
 
     //计算出总的页数
     $pageCount = ceil($total / $pageSize) ;
@@ -48,28 +48,31 @@
     //19 20 21 22 23 24 25 26 27        18,9 
 
     $start = $pageCurrent - floor($pageLimit / 2);
-    $start = $start < 1? 1 :$start;
-
+   //判断起点的边界不能小于1
+   if($start < 1) {
+    $start = 1;
+    }
+ //根据页码的起点计算终点（长度是固定的）
     $end = $start + $pageLimit - 1 ;
-
-    // $end = $end > $pageCount ?$pageCount :$end;
     if($end > $pageCount ){
       $end = $pageCount;
       $start = $end - $pageLimit + 1; // 开始页面要重新计算
+       // 同样需要判断起点边界不能小于1
+       if($start < 1) {
+        $start = 1;
+        }
     }
-    // $pages =range(1,10);
-    // $pages =range(1,$pageCount);
-    $pages =range($start,$end);
-
+ 
+    $pages = range($start,$end);
 
     //设置当前页面中显示数据的起始编号
     $offset  = ($pageCurrent -1) * $pageSize;
-  // $lists = query('SELECT * FROM posts');
-  // $lists = query('SELECT * FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id');
-  $lists = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.status,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
 
+  // $lists = query('SELECT * FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id');
+  $lists = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.status,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
   // print_r($lists);
   // exit;
+
     // 删除
   if($action=='delete') {
     $result = delete('DELETE FROM posts WHERE id = '.$pid);
@@ -120,9 +123,13 @@
           <li><a href="/admin/posts.php?page=<?php echo $prevPage?>">上一页</a></li>
           <?php foreach($pages as $key => $val){?>
               <?php if($pageCurrent == $val){ ?>
-              <li class="active"><a href="/admin/posts.php?page=<?php echo $val?>"><?php echo $val?></a></li>
+              <li class="active">
+                <a href="/admin/posts.php?page=<?php echo $val?>"><?php echo $val?></a>
+              </li>
               <?php }else { ?>
-              <li><a href="/admin/posts.php?page=<?php echo $val?>"><?php echo $val?></a></li>
+              <li>
+                <a href="/admin/posts.php?page=<?php echo $val?>"><?php echo $val?></a>
+              </li>
               <?php }?>
           <?php }?>
           <li><a href="/admin/posts.php?page=<?php echo $nextPage?>">下一页</a></li>

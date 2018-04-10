@@ -6,14 +6,67 @@
    $actives = array('posts', 'postadd', 'categories');
    // 定义二级导航状态
    $active = 'categories';
-
+  // 当前数据库里面有106条数据
+  $total = query('SELECT count(*) AS total FROM categories');
+  // print_r($total);
+  // exit();
+  
+      $total = $total[0]['total'];
+  //   print_r($total);
+  // exit();
+      //每页显示几条数据
+      $pageSize = 7;
+  
+      //计算出总的页数
+      $pageCount = ceil($total / $pageSize) ;
+  
+      //获取当前页的编码
+      $pageCurrent = isset($_GET['page'])?$_GET['page']:'1';
+  
+      //设置上一页
+      $prevPage = $pageCurrent - 1;
+  
+      $prevPage = $prevPage <1? 1 : $prevPage;
+      //设置下一页
+      $nextPage = $pageCurrent + 1;
+  
+      $nextPage = $nextPage > $pageCount ? $pageCount:$nextPage;
+  
+      //设置当前显示的每页的编码个数
+      $pageLimit = 7;  //1 2 3 4 5 6 7     5 6 7  8 9 10 11    19  20  21 22 23 24 25
+  
+      //1 2 3 4 5 6 7 8 9           limit 0, 9,   (当前页-1)*$pageSize
+      //10 11 12 13 14 15 16 17 18        9, 9
+      //19 20 21 22 23 24 25 26 27        18,9 
+  
+   //根据当前页码计算页码的起点
+      $start = $pageCurrent - floor($pageLimit / 2);
+   //判断起点的边界不能小于1
+      if($start < 1) {
+        $start = 1;
+    }
+    //根据页码的起点计算终点（长度是固定的）
+      $end = $start + $pageLimit - 1 ;
+      if($end > $pageCount ){
+        $end = $pageCount;
+        $start = $end - $pageLimit + 1; // 开始页面要重新计算
+         // 同样需要判断起点边界不能小于1
+         if($start < 1) {
+          $start = 1;
+          }
+      }
+  
+      $pages =range($start,$end);
+  //     //设置当前页面中显示数据的起始编号
+      $offset  = ($pageCurrent -1) * $pageSize;
     $msg = '';
     $action = isset($_GET['action'])?$_GET['action']:'add';
     $ct_id =  isset($_GET['ct_id'])?$_GET['ct_id']:'';
     $title = '添加新分类目录';
     $btnText = '添加';
     //1. 当页面跳转到此处的时候，要查询数据库，渲染当前页面
-    $lists = query('SELECT * FROM categories');
+    // $lists = query('SELECT * FROM categories');
+    $lists = query("SELECT categories.id,categories.slug,categories.name FROM categories limit ".$offset.",".$pageSize."");
     // print_r($lists);
     // exit;
 
@@ -120,6 +173,33 @@
               <button class="btn btn-primary" type="submit"><?php echo $btnText?></button>
             </div>
           </form>
+        </div>
+        <div class="page-action">
+          <!-- show when multiple checked -->
+          <div class="btn-batch deleteAll" style="display: none">
+            <button class="btn btn-info btn-sm">批量批准</button>
+            <button class="btn btn-warning btn-sm">批量拒绝</button>
+            <button class="btn btn-danger btn-sm">批量删除</button>
+          </div>
+          <ul class="pagination pagination-sm pull-right">
+            <li>
+              <a href="/admin/categories.php?page=<?php echo $prevPage?>">上一页</a>
+            </li>
+            <?php foreach($pages as $key => $val){?>
+              <?php if($pageCurrent == $val){ ?>
+              <li class="active">
+                <a href="/admin/categories.php?page=<?php echo $val?>"><?php echo $val?></a>
+              </li>
+              <?php }else { ?>
+              <li>
+                <a href="/admin/categories.php?page=<?php echo $val?>"><?php echo $val?></a>
+              </li>
+              <?php }?>
+          <?php }?>
+            <li>
+              <a href="/admin/categories.php?page=<?php echo $nextPage?>">下一页</a>
+            </li> 
+          </ul>
         </div>
         <div class="col-md-8">
           <div class="page-action">

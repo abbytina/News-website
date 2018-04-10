@@ -7,8 +7,11 @@
   <meta name="site_description" content="<?php echo $sites[3]['value']?>">
   <title><?php echo $sites[2]['value']?></title>
   <link rel="shurtcut icon" href="./News.ico">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pagination.css">
   <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="assets/vendors/nprogress/nprogress.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/vendors/nprogress/nprogress.js"></script>
 </head>
 <body>
   <div class="wrapper">
@@ -20,7 +23,7 @@
       </ul> -->
     </div>
     <div class="header">
-      <h1 class="logo"><a href="index.php"><img src="assets/img/logo.png" alt=""></a></h1>
+      <h1 class="logo"><a href="/"><img src="assets/img/logo.png" alt=""></a></h1>
       <ul class="nav">
         <?php foreach($lists as $key => $vals){?>
           <li class="li_nav"><a href="<?php echo $vals['link']?>"><i class="<?php echo $vals['icon']?>"></i><?php echo $vals['title']?></a></li>

@@ -51,7 +51,7 @@ if (!empty($msg)) {
     <div class='reg_title'>
         <h2>Sign Up</h2>
     </div>
-    <form class="reg-wrap" action="register.php" method="post">
+    <form class="reg-wrap" action="" method="post">
         <div class="form-group">
             <input name="username" value="" type="text" class="form-control" autocomplete="off" placeholder="用户名" autofocus>
         </div>

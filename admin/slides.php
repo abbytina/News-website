@@ -135,6 +135,14 @@
             </div>
           </form>
         </div>
+        <div class="page-action">
+          <!-- show when multiple checked -->
+          <div class="btn-batch deleteAll" style="display: none">
+            <button class="btn btn-info btn-sm">批量批准</button>
+            <button class="btn btn-warning btn-sm">批量拒绝</button>
+            <button class="btn btn-danger btn-sm">批量删除</button>
+          </div>
+        </div>
         <div class="col-md-8">
           <div class="page-action">
             <!-- show when multiple checked -->

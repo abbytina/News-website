@@ -27,7 +27,7 @@ class Comment
         $content = $_POST['content'];
 
         if (empty($content)) {
-            return Utils::formatApi(1, '文章内容不能为空');
+            return Utils::formatApi(1, '评论内容不能为空');
         }
         $userInfo = Utils::getUserInfo();
         $query = query("SELECT * FROM posts where id = {$postId}");
@@ -39,7 +39,7 @@ class Comment
             'email' => $userInfo['email'],
             'created' => date('Y-m-d H:i:s'),
             'content' => $content,
-            'status' => 'held',
+            'status' => 'approved',
             'post_id' => $postId,
         );
         if (!insert('comments', $data)) {
