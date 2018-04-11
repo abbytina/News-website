@@ -74,58 +74,55 @@ header('content-type:text/html;charset=utf-8');
   //  exit;
   
       //post提交过来的数据
-      if(!empty($_POST)){ //接收post提交过来的数据      
-       if($action =='update'){
-           //
-           //更新数据   $_POST
-           // print_r($_POST);
-           // exit;
-         $comments_id = $_POST['id'];
+    //   if(!empty($_POST)){ //接收post提交过来的数据      
+    //    if($action =='update'){
+    //        //
+    //        //更新数据   $_POST
+    //        // print_r($_POST);
+    //        // exit;
+    //      $comments_id = $_POST['id'];
          
-         unset($_POST['id']);//删除掉这个id，因为更新的时候是不能更新id的，得根据id的条件去更新其它的字段值
-         // echo $str;
-         // exit;
-         // $sql = "update users set ". "aa=bb,cc=dd"
+    //      unset($_POST['id']);//删除掉这个id，因为更新的时候是不能更新id的，得根据id的条件去更新其它的字段值
+    //      // echo $str;
+    //      // exit;
+    //      // $sql = "update users set ". "aa=bb,cc=dd"
         
-         $result = update('comments',$_POST,$comments_id);
-         // print_r($result);
-         // exit;
-         if($result ){
-           header('location:/admin/comments.php');
-         }else {
-           $msg = '更新数据失败...';
-         }
-        }else if($action=='deleteAll') {
-           $sql = "DELETE FROM comments where id in (".implode(',',$_POST['ids']).")";
-          $result = delete($sql);
+    //      $result = update('comments',$_POST,$comments_id);
+    //      // print_r($result);
+    //      // exit;
+    //      if($result ){
+    //        header('location:/admin/comments.php');
+    //      }else {
+    //        $msg = '更新数据失败...';
+    //      }
+    //     }else if($action=='deleteAll') {
+    //        $sql = "DELETE FROM comments where id in (".implode(',',$_POST['ids']).")";
+    //       $result = delete($sql);
 
-           header('Content-type:application/json');
-          if($result) {
-            //向前台发送一条删除 成功的信息
-            $arr = array('code'=>10000,'msg'=>'删除成功');
-            echo json_encode($arr);//转换成字符串输出到前台
-          }else {
-             $arr = array('code'=>10001,'msg'=>'删除失败...');
-            echo json_encode($arr);//转换成字符串输出到前台
-          }
-          exit;
+    //        header('Content-type:application/json');
+    //       if($result) {
+    //         //向前台发送一条删除 成功的信息
+    //         $arr = array('code'=>10000,'msg'=>'删除成功');
+    //         echo json_encode($arr);//转换成字符串输出到前台
+    //       }else {
+    //          $arr = array('code'=>10001,'msg'=>'删除失败...');
+    //         echo json_encode($arr);//转换成字符串输出到前台
+    //       }
+    //       exit;
+    //     }
+    // }
+
+      //删除  
+
+    if($action=='delete' && isset($_GET['pid'])) {
+      $pid = $_GET['pid'];
+      $result = delete('DELETE FROM comments WHERE id = '. $pid);
+        if($result){
+          header('location:/admin/comments.php');
+        }else {
+          $msg = '删除数据失败...';
         }
     }
-      
-    if($action=='delete'){
-      //删除  
-      // $connect = connect();
-      // $result = mysqli_query($connect,"DELETE FROM users where id = ".$id);
-      // print_r($result);
-      // exit;
-      $result= delete("DELETE FROM comments where id = ".$id);
-      if($result){
-        header('location:/admin/comments.php');//刷新页面
-      }else {
-        $msg = '删除数据失败...';
-      }
-    }
- // }
 ?>
 
 <!DOCTYPE html>
@@ -206,7 +203,7 @@ header('content-type:text/html;charset=utf-8');
                   <td>垃圾</td>
                   <?php }?>
             <td class="text-center">
-              <a href="/admin/comments.php?action=status&comments_id=<?php echo $vals['id']?>" class="btn btn-info btn-xs">批准</a>
+              <a href="/admin/comments.php?action=status&comments_id=<?php echo $vals['id']?>" class="btn btn-info btn-xs">驳回</a>
               <a href="/admin/comments.php?action=delete&comments_id=<?php echo $vals['id']?>" class="btn btn-danger btn-xs">删除</a>
             </td>
           </tr>
