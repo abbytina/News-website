@@ -6,7 +6,7 @@
    * 3.当数据量很大的时候，要实现一个分布的处理
    * 4.当单击编辑按钮的时候，要跳转到post-add.php页面
    */
-   error_reporting(0);
+//   error_reporting(0);
   require '../functions.php';
   $msg = '';
   checkLogin();
@@ -74,9 +74,11 @@
   // print_r($lists);
   // exit;
 
+$action = isset($_GET['action']) ? $_GET['action'] : 'index';
     // 删除
-  if($action=='delete') {
-    $result = delete('DELETE FROM posts WHERE id = '.$pid);
+  if($action=='delete' && isset($_GET['pid'])) {
+      $pid = $_GET['pid'];
+    $result = delete('DELETE FROM posts WHERE id = '. $pid);
 
     if($result){
       header('location:/admin/posts.php');

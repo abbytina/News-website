@@ -50,7 +50,7 @@ class Utils
      */
     public static function isLogin()
     {
-        $session = self::session('user_info');
+        $session = self::session('userInfo');
         return empty($session);
     }
 
@@ -59,6 +59,6 @@ class Utils
         if (self::isLogin()) {
             exit(self::formatApi(401, '您还未登录，不能参与评论！'));
         }
-        return self::session('user_info');
+        return self::session('userInfo');
     }
 }
