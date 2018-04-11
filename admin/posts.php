@@ -8,6 +8,7 @@
    */
    error_reporting(0);
   require '../functions.php';
+  $msg = '';
   checkLogin();
    // 定义二级导航
    $actives = array('posts', 'postadd', 'categories');
@@ -76,7 +77,7 @@
     // 删除
   if($action=='delete') {
     $result = delete('DELETE FROM posts WHERE id = '.$pid);
-    $result =  update('posts',$pid); //更新数组库里面的那一项数据
+
     if($result){
       header('location:/admin/posts.php');
     }else {
@@ -101,9 +102,12 @@
         <a href="post-add.php" class="btn btn-primary btn-xs">写文章</a>
       </div>
       <!-- 有错误信息时展示 -->
-      <!-- <div class="alert alert-danger">
-        <strong>错误！</strong>发生XXX错误
-      </div> -->
+      <?php if(!empty($msg)){ ?>
+        <div class="alert alert-danger">
+          <strong>错误！</strong>
+          <?php echo $msg ?>
+        </div> 
+      <?php } ?>
       <div class="page-action">
         <!-- show when multiple checked -->
         <a class="btn btn-danger btn-sm" href="javascript:;" style="display: none">批量删除</a>

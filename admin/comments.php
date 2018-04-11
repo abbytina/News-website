@@ -10,6 +10,8 @@ header('content-type:text/html;charset=utf-8');
   require '../functions.php';
   checkLogin();
   error_reporting(0);
+  // 提示信息
+  $msg = '';
     // 定义导航状态
   $active = 'comments';
 
@@ -140,10 +142,13 @@ header('content-type:text/html;charset=utf-8');
       <div class="page-title">
         <h1>所有评论</h1>
       </div>
-      <!-- 有错误信息时展示 -->
-      <!-- <div class="alert alert-danger">
-        <strong>错误！</strong>发生XXX错误
-      </div> -->
+     <!-- 有错误信息时展示 -->
+     <?php if(!empty($msg)){ ?>
+      <div class="alert alert-danger">
+        <strong>错误！</strong>
+        <?php echo $msg ?>
+      </div> 
+    <?php } ?>
       <div class="page-action">
         <!-- show when multiple checked -->
         <div class="btn-batch deleteAll" style="display: none">
@@ -201,8 +206,8 @@ header('content-type:text/html;charset=utf-8');
                   <td>垃圾</td>
                   <?php }?>
             <td class="text-center">
-              <a href="javascript;" class="btn btn-info btn-xs">批准</a>
-              <a href="/admin/comments.php?action=delete&comments_id=<?php echo $val['id']?>" class="btn btn-danger btn-xs">删除</a>
+              <a href="/admin/comments.php?action=status&comments_id=<?php echo $vals['id']?>" class="btn btn-info btn-xs">批准</a>
+              <a href="/admin/comments.php?action=delete&comments_id=<?php echo $vals['id']?>" class="btn btn-danger btn-xs">删除</a>
             </td>
           </tr>
           <?php }?>
