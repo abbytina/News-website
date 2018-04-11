@@ -187,7 +187,6 @@ header('content-type:text/html;charset=utf-8');
     // 2 上/下一张
     $('.swipe .arrow').on('click', function () {
       var _this = $(this);
-
       if(_this.is('.prev')) {
         swiper.prev();
       } else if(_this.is('.next')) {
