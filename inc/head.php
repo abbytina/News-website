@@ -26,12 +26,14 @@
       <h1 class="logo"><a href="/"><img src="assets/img/logo.png" alt=""></a></h1>
       <ul class="nav">
         <?php foreach($lists as $key => $vals){?>
-          <li class="li_nav"><a href="<?php echo $vals['link']?>"><i class="<?php echo $vals['icon']?>"></i><?php echo $vals['title']?></a></li>
+          <li class="li_nav li_<?php echo $key?>"><a href="<?php echo $vals['link'], '#', $key?>"><i class="<?php echo
+              $vals['icon']?>"></i><?php
+                  echo $vals['title']?></a></li>
         <?php }?>
       </ul>
       <div class="search">
         <form action="/search.php">
-          <input type="text" name="keyword" class="keys" placeholder="输入关键字">
+          <input type="text" name="keyword" class="keys" placeholder="输入关键字" value="<?php echo isset($_GET['keyword'])?$_GET['keyword']:'';?>">
           <input type="submit" class="btn" value="搜索">
         </form>
       </div>
@@ -91,18 +93,21 @@
   //           }
   //       }
 
-  // 2.  js的方式
-  $(document).ready(function(){
-        var navList=document.getElementsByClassName("li_nav");
-        // console.log(navList);
-        for(let i=0;i<navList.length;i++){
-            navList[i].onclick = function(){
-                this.style.backgroundColor = "gray";
-                for (var i = 0; i < $(this).siblings().length; i++) {
-                    $(this).siblings().css("background","");
-                }
-            }  
-
-        }
-    });
+  // 2.  jq的方式
+  // $(document).ready(function(){
+  //       var navList=document.getElementsByClassName("li_nav");
+  //       // console.log(navList);
+  //       for(let i=0;i<navList.length;i++){
+  //           navList[i].onclick = function(){
+  //               this.style.backgroundColor = "gray";
+  //               for (var i = 0; i < $(this).siblings().length; i++) {
+  //                   $(this).siblings().css("background","");
+  //               }
+  //           }
+  //
+  //       }
+  //   });
+    $(function () {
+        $('.li_' + window.location.hash.substr(1)).css('background', 'gray');
+    })
 </script>
