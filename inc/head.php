@@ -74,40 +74,7 @@
   
 </script>
 <script>
-  // 1. js 的方式
-  // var ulnav = document.getElementsByClassName("nav");
-  // var lis = ulnav[0].getElementsByTagName("li");
-  // console.log(lis);
-  // for(var i=0;i<lis.length;i++){
-  //           lis[i].setAttribute("index",i);
-  //           lis[i].onclick=function(){
-  //               for(var i=0;i<lis.length;i++){
-  //                   if(this.getAttribute("index")==i){
-  //                       // lis[i].style.color="#fff";
-  //                       lis[i].style.backgroundColor="#666";
-  //                   }else{
-  //                       // lis[i].style.color="";
-  //                       lis[i].style.backgroundColor="";
-  //                   }
-  //               }
-  //           }
-  //       }
-
-  // 2.  jq的方式
-  // $(document).ready(function(){
-  //       var navList=document.getElementsByClassName("li_nav");
-  //       // console.log(navList);
-  //       for(let i=0;i<navList.length;i++){
-  //           navList[i].onclick = function(){
-  //               this.style.backgroundColor = "gray";
-  //               for (var i = 0; i < $(this).siblings().length; i++) {
-  //                   $(this).siblings().css("background","");
-  //               }
-  //           }
-  //
-  //       }
-  //   });
     $(function () {
-        $('.li_' + window.location.hash.substr(1)).css('background', 'gray');
+        $('.li_' + window.location.hash.substr(1)).css('background', '#F0F6F8');
     })
 </script>
