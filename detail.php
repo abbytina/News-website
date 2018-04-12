@@ -115,10 +115,10 @@ $sites[2]['value'] = $postDetail['title'];
             <a href="javascript:;">
               <div class="com_img">
                         <!-- 判断头像 没有则给默认头像 -->
-                <?php if(empty($_SESSION['userInfo']['avatar'])) { ?>
+                <?php if(empty($item['avatar'])) { ?>
                     <img class="avatar" src="/assets/img/animal.jpg">
                     <?php } else { ?>
-                    <img class="avatar" src="<?php echo $_SESSION['userInfo']['avatar']; ?>">
+                    <img class="avatar" src="<?php echo $item['avatar']; ?>">
                 <?php } ?>
               </div>
               <div class="com_txt">
