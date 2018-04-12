@@ -19,7 +19,7 @@ if (!isset($_POST['email']) || empty($_POST['email'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     // print_r($email, $password);
-    $query = query("SELECT * FROM users WHERE email = '{$email}' AND `password` = '{$password}'");
+    $query = query("SELECT * FROM users WHERE status = 'unactivated' AND email = '{$email}' AND `password` = '{$password}'");
     // print_r($query);
     // exit();
     if (empty($query)) {

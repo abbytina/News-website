@@ -74,7 +74,27 @@ header('content-type:text/html;charset=utf-8');
 
     $sites = query('SELECT * from options where id < 9');
     // 文章内容
-    $contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id DESC limit ".$offset.",".$pageSize.""); 
+    $postSql=<<<SQL
+SELECT
+  p.id,
+  p.title,
+  p.category_id,
+  p.created,
+  p.content,
+  p.feature,
+  p.views,
+  p.slug,
+  u.nickname,
+  categories.name
+FROM posts AS p
+  LEFT JOIN users AS u ON p.user_id = u.id
+  LEFT JOIN categories ON p.category_id = categories.id
+WHERE p.status = 'published'
+ORDER BY id DESC
+limit $offset, $pageSize
+SQL;
+
+    $contents = query($postSql);
     // $contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id ");
     // print_r($contents);
     // exit;
