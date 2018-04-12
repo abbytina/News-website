@@ -41,20 +41,20 @@
       <?php
       // session_start();
       if (!session_id()) session_start();
-      if(!empty($_SESSION['user_info'])) { ?>
+      if(!empty($_SESSION['userInfo'])) { ?>
           <!-- 登录后状态 -->
       <div class="ent_user">
           <div class="ent_img">
           <!-- 判断头像 没有则给默认头像 -->
-          <?php if(empty($_SESSION['user_info']['avatar'])) { ?>
+          <?php if(empty($_SESSION['userInfo']['avatar'])) { ?>
               <img class="avatar" src="/assets/img//animal.jpg">
               <?php } else { ?>
-              <img class="avatar" src="<?php echo $_SESSION['user_info']['avatar']; ?>">
+              <img class="avatar" src="<?php echo $_SESSION['userInfo']['avatar']; ?>">
           <?php } ?>
           </div>
           <div class="en_utxt">
                 <p>
-                  <span>欢迎您，</span><a href="javascript:;"><?php echo  $_SESSION['user_info']['nickname'];?> </a>
+                  <span>欢迎您，</span><a href="javascript:;"><?php echo  $_SESSION['userInfo']['nickname'];?> </a>
                 </p>
           </div>
           <a href="/logouts.php" class="en_exit">[退出]</a>
