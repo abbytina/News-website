@@ -54,7 +54,7 @@
           </div>
           <div class="en_utxt">
                 <p>
-                  <span>欢迎您，</span><a href="javascript:;"><?php echo  $_SESSION['userInfo']['nickname'];?> </a>
+                  <span>欢迎您，</span><a href="/profiles.php"><?php echo  $_SESSION['userInfo']['nickname'];?> </a>
                 </p>
           </div>
           <a href="/logouts.php" class="en_exit">[退出]</a>
