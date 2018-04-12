@@ -91,7 +91,7 @@
   //           }
   //       }
 
-  // 2.  jq的方式
+  // 2.  js的方式
   $(document).ready(function(){
         var navList=document.getElementsByClassName("li_nav");
         // console.log(navList);
