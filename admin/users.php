@@ -76,7 +76,7 @@
        //post提交过来的数据
      if(!empty($_POST)){ //接收post提交过来的数据      
          if($action =='add'){
-             $_POST['status'] = 'unactivated';
+             $_POST['status'] = 'activated';
             $result = insert('users',$_POST);
             if($result){
               header('location:/admin/users.php');//相当于刷新 当前的页面
@@ -219,11 +219,7 @@
         </div>
         <div class="page-action">
           <!-- show when multiple checked -->
-            <div class="btn-batch deleteAll" style="display: none">
-              <button class="btn btn-info btn-sm">批量批准</button>
-              <button class="btn btn-warning btn-sm">批量拒绝</button>
-              <button class="btn btn-danger btn-sm">批量删除</button>
-            </div>
+          
             <ul class="pagination pagination-sm pull-right">
               <li>
                 <a href="/admin/users.php?page=<?php echo $prevPage?>">上一页</a>

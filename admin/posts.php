@@ -81,6 +81,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'index';
     $result = delete('DELETE FROM posts WHERE id = '. $pid);
 
     if($result){
+      
       header('location:/admin/posts.php');
     }else {
       $msg = '删除数据失败...';

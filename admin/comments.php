@@ -72,48 +72,26 @@ header('content-type:text/html;charset=utf-8');
   LEFT JOIN posts on comments.post_id = posts.id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
   //  print_r($com_lists);
   //  exit;
-  
-      //post提交过来的数据
-    //   if(!empty($_POST)){ //接收post提交过来的数据      
-    //    if($action =='update'){
-    //        //
-    //        //更新数据   $_POST
-    //        // print_r($_POST);
-    //        // exit;
-    //      $comments_id = $_POST['id'];
-         
-    //      unset($_POST['id']);//删除掉这个id，因为更新的时候是不能更新id的，得根据id的条件去更新其它的字段值
-    //      // echo $str;
-    //      // exit;
-    //      // $sql = "update users set ". "aa=bb,cc=dd"
-        
-    //      $result = update('comments',$_POST,$comments_id);
-    //      // print_r($result);
-    //      // exit;
-    //      if($result ){
-    //        header('location:/admin/comments.php');
-    //      }else {
-    //        $msg = '更新数据失败...';
-    //      }
-    //     }else if($action=='deleteAll') {
-    //        $sql = "DELETE FROM comments where id in (".implode(',',$_POST['ids']).")";
-    //       $result = delete($sql);
+    
+    //批量删除
+       if($action=='deleteAll') {
+           $sql = "DELETE FROM comments where id in (".implode(',',$_POST['ids']).")";
+          $result = delete($sql);
 
-    //        header('Content-type:application/json');
-    //       if($result) {
-    //         //向前台发送一条删除 成功的信息
-    //         $arr = array('code'=>10000,'msg'=>'删除成功');
-    //         echo json_encode($arr);//转换成字符串输出到前台
-    //       }else {
-    //          $arr = array('code'=>10001,'msg'=>'删除失败...');
-    //         echo json_encode($arr);//转换成字符串输出到前台
-    //       }
-    //       exit;
-    //     }
-    // }
+           header('Content-type:application/json');
+          if($result) {
+            //向前台发送一条删除 成功的信息
+            $arr = array('code'=>10000,'msg'=>'删除成功');
+            echo json_encode($arr);//转换成字符串输出到前台
+          }else {
+             $arr = array('code'=>10001,'msg'=>'删除失败...');
+            echo json_encode($arr);//转换成字符串输出到前台
+          }
+          exit;
+        }
+
 
       //删除  
-
     if($action=='delete' && isset($_GET['pid'])) {
       $pid = $_GET['pid'];
       $result = delete('DELETE FROM comments WHERE id = '. $pid);
@@ -149,8 +127,6 @@ header('content-type:text/html;charset=utf-8');
       <div class="page-action">
         <!-- show when multiple checked -->
         <div class="btn-batch deleteAll" style="display: none">
-          <button class="btn btn-info btn-sm">批量批准</button>
-          <button class="btn btn-warning btn-sm">批量拒绝</button>
           <button class="btn btn-danger btn-sm">批量删除</button>
         </div>
         <ul class="pagination pagination-sm pull-right">
@@ -173,43 +149,44 @@ header('content-type:text/html;charset=utf-8');
           </li> 
         </ul>
       </div>
-      <table class="table table-striped table-bordered table-hover">
-        <thead>
-          <tr>
-            <th class="text-center" width="40"><input type="checkbox"></th>
-            <th>作者</th>
-            <th>评论</th>
-            <th>评论在</th>
-            <th>提交于</th>
-            <th>状态</th>
-            <th class="text-center" width="100">操作</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php foreach($com_lists as $key => $vals){ ?>
-          <tr class="danger">
-            <td class="text-center"><input type="checkbox"></td>
-            <td><?php echo $vals['author']?></td>
-            <td><?php echo $vals['content']?></td>
-            <td><?php echo $vals['title']?></td>
-            <td><?php echo $vals['created']?></td>
-            <?php if($vals['status']=='approved'){ ?>
-                  <td>批准</td>
-                  <?php }else if($vals['status']=='rejected'){ ?>
-                  <td>驳回</td>
-                  <?php }else if($vals['status']=='held'){ ?>
-                  <td>展示</td>
-                  <?php }else {?>
-                  <td>垃圾</td>
-                  <?php }?>
-            <td class="text-center">
-              <a href="/admin/comments.php?action=status&comments_id=<?php echo $vals['id']?>" class="btn btn-info btn-xs">驳回</a>
-              <a href="/admin/comments.php?action=delete&comments_id=<?php echo $vals['id']?>" class="btn btn-danger btn-xs">删除</a>
-            </td>
-          </tr>
-          <?php }?>
-        </tbody>
-      </table>
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th class="text-center" width="40">
+              <input type="checkbox" class="toggleChk"></th>
+              <th>作者</th>
+              <th>评论</th>
+              <th>评论在</th>
+              <th>提交于</th>
+              <th>状态</th>
+              <th class="text-center" width="100">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php foreach($com_lists as $key => $vals){ ?>
+            <tr class="danger">
+              <td class="text-center"><input type="checkbox" class="chk"></td>
+              <td><?php echo $vals['author']?></td>
+              <td><?php echo $vals['content']?></td>
+              <td><?php echo $vals['title']?></td>
+              <td><?php echo $vals['created']?></td>
+              <?php if($vals['status']=='approved'){ ?>
+                    <td>批准</td>
+                    <?php }else if($vals['status']=='rejected'){ ?>
+                    <td>驳回</td>
+                    <?php }else if($vals['status']=='held'){ ?>
+                    <td>展示</td>
+                    <?php }else {?>
+                    <td>垃圾</td>
+                    <?php }?>
+              <td class="text-center">
+                <a href="/admin/comments.php?action=status&comments_id=<?php echo $vals['id']?>" class="btn btn-info btn-xs">驳回</a>
+                <a href="/admin/comments.php?action=delete&comments_id=<?php echo $vals['id']?>" class="btn btn-danger btn-xs">删除</a>
+              </td>
+            </tr>
+            <?php }?>
+          </tbody>
+        </table>
     </div>
   </div>
 
