@@ -106,7 +106,8 @@ if ($action == 'deleteAll') {
     } else {
         $data = $row[0];
         $status = $data['status'] == 'approved' ? 'rejected' : 'approved';
-        if (!update('comments', ['status' => $status], $cid)) {
+        // if (!update('comments', ['status' => $status], $cid)) {
+        if (!update('comments',  array('status' => $status), $cid)) {
             $msg = '更新失败';
         }
         header('location:/admin/comments.php');

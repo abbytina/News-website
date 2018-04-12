@@ -8,7 +8,7 @@ $ss_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.create
   // exit;
 
 // 最新评论
-$pl_contents = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content FROM comments ORDER BY id DESC limit 0,5");
+$pl_contents = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,users.avatar,posts.title FROM comments LEFT JOIN users on comments.author = users.nickname LEFT JOIN posts on comments.post_id = posts.id ORDER BY id DESC limit 0,5");
 // print_r($pl_contents);
 // exit;
 
