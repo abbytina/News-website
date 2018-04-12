@@ -45,7 +45,8 @@ SQL;
  */
 function get_post_comment($postId)
 {
-    $sql = "SELECT * FROM comments WHERE post_id = {$postId} AND `status` ='approved' ORDER BY created DESC";
+    $sql = "SELECT c.id, c.author,c.email,c.content,u.avatar FROM comments AS c left join users as u ON u.email = c.email 
+WHERE post_id = {$postId} AND c.`status` = 'approved' ORDER BY c.created DESC ";
     $row = query($sql);
     return $row;
 }
