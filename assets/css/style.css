@@ -640,6 +640,9 @@ img {
   color: #999;
   text-decoration: none;
 }
+.header .slink a:hover {
+  color: #61b3e5;
+}
 /* 登陆注册 */
 .header .lg_slink {
   text-align: center;

@@ -28,7 +28,11 @@ $pl_contents = query("SELECT comments.id,comments.author,comments.email,comments
               <p class="title"><?php echo $vals['title']?></p>
               <p class="reading"><i class="fa fa-paper-plane"></i></p>
               <div class="pic">
-                <img src=<?php echo $vals['feature']?> alt="">
+              <?php if(empty($vals['feature'])){ ?>
+                 <img src="../assets/img/cimg.jpeg" alt=""> 
+              <?php } else { ?>
+              <img src=<?php echo $vals['feature']?> alt="">     
+              <?php } ?> 
               </div>
             </a>
           </li>

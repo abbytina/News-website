@@ -162,7 +162,7 @@ SQL;
             </p>
             <a href="javascript:;" class="thumb">
               <?php if(empty($vals['feature'])){ ?>
-                 <img src="./assets/img/girl.jpg" alt=""> 
+                 <img src="./assets/img/cimg.jpeg" alt=""> 
               <?php } else { ?>
               <img src=<?php echo $vals['feature']?> alt="">     
               <?php } ?> 

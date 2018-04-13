@@ -38,7 +38,7 @@
         </form>
       </div>
       <div class="slink">
-        <a href="javascript:;">微博&nbsp;<i class="fa fa-weibo"></i></a> | <a href="javascript:;">公众号&nbsp;<i class="fa fa-wechat"></i></a>
+        <a href="/weibo.php">微博&nbsp;<i class="fa fa-weibo"></i></a> | <a href="/wechat.php">公众号&nbsp;<i class="fa fa-wechat"></i></a>
       </div>
       <?php
       // session_start();

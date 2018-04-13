@@ -104,7 +104,11 @@ $live_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.crea
               </a>
             </p>
             <a href="javascript:;" class="thumb">
-              <img src=<?php echo $vals['feature']?> alt="">
+            <?php if(empty($vals['feature'])){ ?>
+                 <img src="./assets/img/cimg.jpeg" alt=""> 
+              <?php } else { ?>
+              <img src=<?php echo $vals['feature']?> alt="">     
+              <?php } ?>
             </a>
           </div>
         </div>

@@ -152,7 +152,11 @@ $sites[2]['value'] = $postDetail['title'];
         <?php foreach($hot_contents as $key =>$vals){ ?>
           <li>
             <a href="detail.php?id=<?php echo $vals['id'] ?>">
-              <img src=<?php echo $vals['feature']?> alt="">
+            <?php if(empty($vals['feature'])){ ?>
+                 <img src="./assets/img/cimg.jpeg" alt=""> 
+              <?php } else { ?>
+              <img src=<?php echo $vals['feature']?> alt="">     
+              <?php } ?>
               <span><?php echo $vals['title']?></span>
             </a>
           </li>
