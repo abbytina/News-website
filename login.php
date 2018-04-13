@@ -21,8 +21,6 @@
       <input type="button" id="lg_btn" class="btn btn-primary btn-block" value="登录">
       <a href="index.php" class="in_back" >返回首页&nbsp;<i class="fa fa-mail-reply"></i></a>
     </form>
-    <div>  
-    </div>
   </div>
 </body>
 </html>
