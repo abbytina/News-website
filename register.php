@@ -26,15 +26,15 @@ if (isPost()) {
             if (!insert('users', $data)) {
                 $msg = '注册失败';
             } else {
-                echo '<html><head><meta charset="UTF-8"></head></html><script>alert("注册成功！可直接登录");location.href = "/login.php"</script>';
+                echo '<script>alert("注册成功！可直接登录");location.href = "/login.php"</script>';
                 exit();
             }
         }
     }
 }
-if (!empty($msg)) {
-    echo '<html><head><meta charset="UTF-8"></head></html><script>alert("' . $msg . '");</script>';
-}
+// if (!empty($msg)) {
+//     echo '<script>alert("' . $msg . '");</script>';
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +45,11 @@ if (!empty($msg)) {
     <title>register</title>
     <link rel="stylesheet" href="assets/css/register.css">
     <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.css">
+    <?php
+        if (!empty($msg)) {
+            echo '<script>alert("' . $msg . '");</script>';
+        }
+    ?>
 </head>
 <body>
 <div class="b_register">

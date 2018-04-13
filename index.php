@@ -99,7 +99,7 @@ SQL;
     // print_r($contents);
     // exit;
     // 热门排行 按点击数（阅读数）查询 
-    $hot_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY views DESC limit 0,5");
+    $hot_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id where posts.status= 'published' ORDER BY views DESC limit 0,5");
     // print_r($hot_contents);
     // exit;
  ?>
@@ -161,8 +161,11 @@ SQL;
               </a>
             </p>
             <a href="javascript:;" class="thumb">
-              <!-- <img src="uploads/hots_2.jpg" alt="">  -->
-              <img src=<?php echo $vals['feature']?> alt="">      
+              <?php if(empty($vals['feature'])){ ?>
+                 <img src="./assets/img/girl.jpg" alt=""> 
+              <?php } else { ?>
+              <img src=<?php echo $vals['feature']?> alt="">     
+              <?php } ?> 
             </a>
           </div>
         </div>

@@ -70,7 +70,7 @@
      * 2. 跳转到这个页面之后，应该把当前页面的信息渲染出来
      */  
       // $lists = query('SELECT * FROM users');
-       $lists = query("SELECT users.id,users.slug,users.email,users.password,users.nickname,users.avatar,users.bio,users.status FROM users limit ".$offset.",".$pageSize."");
+       $lists = query("SELECT users.id,users.slug,users.email,users.password,users.nickname,users.avatar,users.bio,users.status FROM users ORDER BY id DESC limit ".$offset.",".$pageSize."");
     //  print_r($lists);
     //  exit();
        //post提交过来的数据
@@ -210,7 +210,7 @@
             </div>
             <div class="form-group">
               <label for="password">密码</label>
-              <input id="password" value="<?php echo isset($rows[0]['password'])?$rows[0]['password']:'' ?>" class="form-control" name="password" type="text" placeholder="密码">
+              <input id="password" value="<?php echo isset($rows[0]['password'])?$rows[0]['password']:'' ?>" class="form-control" name="password" type="password" placeholder="密码">
             </div>
             <div class="form-group">
               <button class="btn btn-primary" type="submit"><?php echo $btnText?></button>

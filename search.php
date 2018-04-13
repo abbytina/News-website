@@ -101,25 +101,33 @@ $lists = json_decode($json[0]['value'], true);
     <div class="content">
       <div class="panel new">
         <h3>搜索结果</h3>
-        <?php foreach($postLists as $key => $vals){ ?>
-        <div class="entry">
-          <div class="head">
-            <a href="detail.php?id=<?php echo $vals['id'] ?>"><?php echo $vals['title']?></a>
+        <?php if(empty($postLists)) { ?>
+          <div class="entry">
+            <div class="head">
+              <a href="">暂无搜索结果</a>
+            </div>
           </div>
-          <div class="main">
-            <p class="info"><?php echo $vals['nickname']?>  发表于 <?php echo $vals['created']?></p>
-            <p class="brief"><?php echo $vals['slug']?></p>
-            <p class="extra">
-              <span class="reading">阅读(<?php echo $vals['views']?>)</span>
-              <a href="javascript:;" class="tags">
-                分类：<span><?php echo $vals['name']?></span>
-              </a>
-            </p>
-            <a href="javascript:;" class="thumb">
-              <img src=<?php echo $vals['feature']?> alt="">
-            </a>
-          </div>
-        </div>
+        <?php } else { ?>
+            <?php foreach($postLists as $key => $vals){ ?>
+            <div class="entry">
+              <div class="head">
+                <a href="detail.php?id=<?php echo $vals['id'] ?>"><?php echo $vals['title']?></a>
+              </div>
+              <div class="main">
+                <p class="info"><?php echo $vals['nickname']?>  发表于 <?php echo $vals['created']?></p>
+                <p class="brief"><?php echo $vals['slug']?></p>
+                <p class="extra">
+                  <span class="reading">阅读(<?php echo $vals['views']?>)</span>
+                  <a href="javascript:;" class="tags">
+                    分类：<span><?php echo $vals['name']?></span>
+                  </a>
+                </p>
+                <a href="javascript:;" class="thumb">
+                  <img src=<?php echo $vals['feature']?> alt="">
+                </a>
+              </div>
+            </div>
+            <?php }?>
         <?php }?>
       </div>
     </div>

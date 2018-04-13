@@ -70,7 +70,7 @@
     $offset  = ($pageCurrent -1) * $pageSize;
 
   // $lists = query('SELECT * FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id');
-  $lists = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.status,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
+  $lists = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.status,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY id DESC limit ".$offset.",".$pageSize.""); //精确查询,可解决覆盖的问题
   // print_r($lists);
   // exit;
 

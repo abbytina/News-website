@@ -45,7 +45,7 @@ SQL;
  */
 function get_post_comment($postId)
 {
-    $sql = "SELECT c.id, c.author,c.email,c.content,u.avatar FROM comments AS c left join users as u ON u.email = c.email 
+    $sql = "SELECT c.id, c.author,c.email,c.created,c.content,u.avatar FROM comments AS c left join users as u ON u.email = c.email 
 WHERE post_id = {$postId} AND c.`status` = 'approved' ORDER BY c.created DESC ";
     $row = query($sql);
     return $row;
@@ -55,11 +55,13 @@ if (!isset($_GET['id'])) {
     echo '页面不存在';
     exit();
 }
+// 文章详情
 $postDetail = get_post_detail($_GET['id']);
-
+// 评论详情
+$commentsDetail = get_post_comment($_GET['id']);
   // 热门推荐内容
   // 热门排行 按点击数（阅读数）查询 
-  $hot_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id ORDER BY views DESC limit 0,3");
+  $hot_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,posts.views,posts.slug,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id where posts.status= 'published' ORDER BY views DESC limit 0,3");
   // print_r($hot_contents);
   // exit;
 ?>
@@ -110,27 +112,37 @@ $sites[2]['value'] = $postDetail['title'];
         <h3 class="com_title" id="comments">
         <strong>评论列表</strong>
         </h3> 
-       <?php foreach(get_post_comment($_GET['id']) as $item){ ?>
-          <ul class="body com_lists">
-          <li>
-            <a href="javascript:;">
-              <div class="com_img">
-                        <!-- 判断头像 没有则给默认头像 -->
-                <?php if(empty($item['avatar'])) { ?>
-                    <img class="avatar" src="/assets/img/animal.jpg">
-                    <?php } else { ?>
-                    <img class="avatar" src="<?php echo $item['avatar']; ?>">
-                <?php } ?>
-              </div>
-              <div class="com_txt">
+        <?php if(empty($commentsDetail)) { ?>
+          <ul class="body com_lists"> 
+              <div>
                 <p>
-                  <span><?php echo $item['author']?></span>&nbsp;&nbsp; 在&nbsp;&nbsp;<span><?php echo $item['created']?></span>&nbsp;&nbsp;说:
+                  <span>暂无评论！</span>
                 </p>
-                <p><?php echo $item['content']?></p>
-              </div>
-            </a>
-          </li>
+              </div>  
           </ul>
+        <?php }else{?>
+          <?php foreach($commentsDetail as $item){ ?>
+              <ul class="body com_lists">
+              <li>
+                <a href="javascript:;">
+                  <div class="com_img">
+                            <!-- 判断头像 没有则给默认头像 -->
+                    <?php if(empty($item['avatar'])) { ?>
+                        <img class="avatar" src="/assets/img/animal.jpg">
+                        <?php } else { ?>
+                        <img class="avatar" src="<?php echo $item['avatar']; ?>">
+                    <?php } ?>
+                  </div>
+                  <div class="com_txt">
+                    <p>
+                      <span><?php echo $item['author']?></span>&nbsp;&nbsp; 在&nbsp;&nbsp;<span><?php echo $item['created']?></span>&nbsp;&nbsp;说:
+                    </p>
+                    <p><?php echo $item['content']?></p>
+                  </div>
+                </a>
+              </li>
+              </ul>
+            <?php }?>
         <?php }?>
       </div>
         <!-- 热门推荐 -->

@@ -3,12 +3,12 @@
 // 查询趣生活的文章内容
 // $live_contents = query("SELECT id,title,category_id,created,content,feature FROM posts WHERE category_id = '4' ORDER BY id DESC limit 0,8");
 // 随机推荐
-$ss_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id  ORDER BY rand() DESC limit 0,5");
+$ss_contents = query("SELECT posts.id,posts.title,posts.category_id,posts.created,posts.content,posts.feature,users.nickname,categories.name FROM posts LEFT JOIN users on posts.user_id = users.id LEFT JOIN categories on  posts.category_id = categories.id where posts.status= 'published' ORDER BY rand() DESC limit 0,5");
   // print_r($ss_contents);
   // exit;
 
 // 最新评论
-$pl_contents = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,users.avatar,posts.title FROM comments LEFT JOIN users on comments.author = users.nickname LEFT JOIN posts on comments.post_id = posts.id ORDER BY id DESC limit 0,5");
+$pl_contents = query("SELECT comments.id,comments.author,comments.email,comments.created,comments.content,users.avatar,posts.title FROM comments LEFT JOIN users on comments.author = users.nickname LEFT JOIN posts on comments.post_id = posts.id where comments.status= 'approved' ORDER BY id DESC limit 0,5");
 // print_r($pl_contents);
 // exit;
 
