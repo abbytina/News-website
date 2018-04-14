@@ -11,7 +11,7 @@
 	if(!file_exists("../uploads/")){ // file_exists()是用来判断文件夹是否存在
 		mkdir('../uploads'); //  如果不存的话，则先创建文件夹
 	}
-
+	// 事件戳
 	$time = time();
 
 	// echo $_FILES['avatar']['name'];
