@@ -63,7 +63,7 @@
 
     $action = isset($_GET['action'])?$_GET['action']:'add';
      $id = isset($_GET['user_id'])?$_GET['user_id']:''; //获取url中的用户id
-    $title = '添加新用户';
+    $title = '添加管理员';
     $btnText = '添加';
     /**
      * 1. 验证用户是否登陆
